@@ -1,0 +1,5 @@
+Database:
+
+2008-01-05
+Table:
+Todo: Priority range: 1-5; Progress range: 0-100;

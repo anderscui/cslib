@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="CodeLib.MyTodo.Domain.Priority">
+    <Position X="6.75" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAggAAAAAAAAAAAAAAAAAAAAAAAAAUAAAA=</HashCode>
+      <FileName>Domain\Priority.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CodeLib.MyTodo.Domain.Category">
+    <Position X="8.5" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAQAAAAAAggAAAAAAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Domain\Category.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CodeLib.MyTodo.Domain.Tag">
+    <Position X="8.5" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAggAAAAAAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Domain\Tag.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CodeLib.MyTodo.Domain.TodoItem">
+    <Position X="4.5" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAEAAAggEgEAAAAAAAAAAAIAEAAAAAAQAABAAA=</HashCode>
+      <FileName>Domain\TodoItem.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Enum Name="CodeLib.MyTodo.Domain.Status">
+    <Position X="5.5" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AABAAAAAAAAAAAAAAAAAAAAAAQAAAAEAAAAAAAAAAAA=</HashCode>
+      <FileName>Domain\Status.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="SimSun" Size="9" />
+</ClassDiagram>

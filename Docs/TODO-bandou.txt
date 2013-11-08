@@ -1,0 +1,9 @@
+1. add login/log out;
+
+2. retrieve data(book/movie or music) from douban;
+
+3. todo list; e.i. my reading; user can add a reading book/add a note/update progress/track progress/add attachments etc.
+
+4. use simple use cases like Uncle Bob or ones in <Write effictive cases>
+
+5. 

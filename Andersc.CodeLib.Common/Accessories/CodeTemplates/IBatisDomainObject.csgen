@@ -1,0 +1,1177 @@
+﻿##|TYPE Template
+##|UNIQUEID 8cce5f83-053f-4be1-97a0-8c67275ac2d8
+##|TITLE IBatis Business Object
+##|NAMESPACE IBatis
+##|SOURCE_TYPE Source
+##|OUTPUT_LANGUAGE XML
+##|GUI_ENGINE .Net Script
+##|GUI_LANGUAGE C#
+##|GUI_BEGIN
+
+<%#REFERENCE System.Windows.Forms.dll %>
+<%#NAMESPACE System, System.Text, System.Collections, Zeus, Zeus.UserInterface, Zeus.DotNetScript %>
+
+public class GeneratedGui : DotNetScriptGui
+{
+	public GeneratedGui( ZeusGuiContext context ) : base( context ) {}
+
+	public override void Setup()
+	{
+		if ( !input.Contains( "chooseTables" ) || !input.Contains( "txtPath" ) ||
+				( !input.Contains( "chkClass" ) && !input.Contains( "chkNaming" ) ) )
+		{
+			ui.Title = "iBATIS.NET Object Mapping Generator";
+			ui.Width = 600;
+			ui.Height = 700;
+	
+			// Grab default output path
+			string sOutputPath = "";
+			string sOutputPathXml = "";
+			
+			if( input.Contains( "defaultOutputPath" ) ) 
+			{
+				sOutputPath = input["defaultOutputPath"].ToString();
+				sOutputPathXml = input["defaultOutputPath"].ToString();
+			}
+
+			// Setup Folder selection input control.
+			GuiLabel label1 = ui.AddLabel( "label1", "Select the .cs output path:", "Select the output path in the field below." );
+			label1.Width = 200;
+			GuiTextBox outputPath = ui.AddTextBox( "outputPath", sOutputPath, "Select the Output Path." );
+			outputPath.Width = 450;
+			GuiFilePicker selectPath = ui.AddFilePicker( "selectPath", "Select Path", "Select the Output Path for .cs files.", "outputPath", true );
+			selectPath.Top = outputPath.Top;
+			selectPath.Width = 100;
+			selectPath.Left = outputPath.Left + outputPath.Width + 20;
+
+			GuiLabel label11 = ui.AddLabel( "label11", "Select the .xml output path:", "Select the output path in the field below." );
+			label11.Width = 200;
+			label11.Top = outputPath.Top + 20;
+			label11.Left = outputPath.Left;
+			GuiTextBox outputPathXml = ui.AddTextBox( "outputPathXML", sOutputPath, "Select the Output Path." );
+			outputPathXml.Top = label11.Top + 20;
+			outputPathXml.Width = 450;
+			GuiFilePicker selectPathXml = ui.AddFilePicker( "selectPathXml", "Select Path", "Select the Output Path for .xml.", "outputPathXML", true );
+			selectPathXml.Top = outputPathXml.Top;
+			selectPathXml.Width = 100;
+			selectPathXml.Left = outputPathXml.Left + outputPathXml.Width + 20;
+
+			GuiLabel label22 = ui.AddLabel( "label22", "Assembly Name: ",  "Provide your objects assembly." );
+			label22.Width = 180;
+			GuiTextBox assemblyName = ui.AddTextBox( "assemblyName", "AssemblyName(without extension)", "Provide your objects assembly name." );				
+			assemblyName.Width = 180;
+
+			GuiLabel label2 = ui.AddLabel( "label2", "Namespace: ",  "Provide your objects namespace." );
+			label2.Width = 280;
+			GuiTextBox classNamespace = ui.AddTextBox( "classNamespace", "CodeLib.Domain", "Provide your objects namespace." );				
+			classNamespace.Width = 280;
+
+            GuiLabel label3 = ui.AddLabel( "label3", "Member variable prefix: ", "Provide your Prefix." );
+			label3.Width = 280;
+			label3.Top = label2.Top;
+			label3.Left = label2.Width + 20;
+			GuiTextBox memberPrefix = ui.AddTextBox( "memberPrefix", "_", "" );
+			memberPrefix.Width = 280;
+			memberPrefix.Top = classNamespace.Top;
+			memberPrefix.Left = classNamespace.Width + 20;
+             
+			// Setup Database selection combobox.
+			GuiLabel label4 = ui.AddLabel( "label4", "Select a database:", "Select a database in the dropdown below." );
+			label4.Width = 250;
+			GuiComboBox chooseDatabase = ui.AddComboBox( "chooseDatabase", "Select a database." );
+			chooseDatabase.Width = 250;
+			
+			GuiLabel label5 = ui.AddLabel( "label5", "Output type:", "Select one or both." );
+			label5.Width = 150;
+			label5.Top = label4.Top;
+			label5.Left = label4.Width + 20;
+			GuiCheckBox chkClass = ui.AddCheckBox( "chkClass", "Create class files.", true, "Create a class file for each table or view selected. (*.cs)" );
+			chkClass.Width = 150;
+			chkClass.Top = chooseDatabase.Top;
+			chkClass.Left = chooseDatabase.Width + 20;
+			GuiCheckBox chkMapping = ui.AddCheckBox( "chkMapping", "Create XML mapping files.", true, "Create an XML file for each table or view selected. (*.hbm.xml)" );
+			chkMapping.Width = 150;
+			chkMapping.Top = chkClass.Top + 20;
+			chkMapping.Left = chkClass.Left;
+
+			GuiLabel label6 = ui.AddLabel( "label6", "Read Only:", "Create as read only?" );
+			label6.Width = 150;
+			label6.Top = label5.Top;
+			label6.Left = label5.Left + label5.Width + 20;
+			GuiCheckBox chkReadOnly = ui.AddCheckBox( "chkReadOnly", "Create as read-only.", false, "Create object and mapping to have read-only access." );
+			chkReadOnly.Width = 150;
+			chkReadOnly.Top = chkClass.Top;
+			chkReadOnly.Left = chkClass.Left + chkClass.Width + 20;
+
+			GuiCheckBox chkCastAsReal = ui.AddCheckBox( "chkCastAsReal", "CAST decimals as REAL.", true, "Cast any decimal types as real in select statements" );
+			chkCastAsReal.Width = 150;
+			chkCastAsReal.Top = chkReadOnly.Top + 20;
+			chkCastAsReal.Left = chkReadOnly.Left;
+
+			GuiCheckBox chkEqualsHashCode = ui.AddCheckBox( "chkEqualsHashCode", "Create Equals and GetHashCode.", false, "Generate Equals and GetHashCode methods." );
+			chkEqualsHashCode.Top = chkMapping.Top + 20;
+	
+	
+			// Setup Tables selection multi-select listbox.
+			GuiLabel label7 = ui.AddLabel( "label7", "Select tables:", "Select tables from the listbox below." );
+			label7.Top = chkEqualsHashCode.Top + 20;
+			GuiListBox chooseTables = ui.AddListBox( "chooseTables", "Select tables." );
+			chooseTables.Height = 120;
+	
+			// Setup Views selection multi-select listbox.
+			GuiLabel label8 = ui.AddLabel( "label8", "Select views:", "Select views from the listbox below." );
+			GuiListBox chooseViews = ui.AddListBox( "chooseViews", "Select views." );
+			chooseViews.Height = 120;
+			
+			// Attach the onchange event to the cmbDatabases control.
+			setupDatabaseDropdown( chooseDatabase );
+			chooseDatabase.AttachEvent( "onchange", "chooseDatabase_onchange" );
+	
+			ui.ShowGui = true;
+		}
+		else 
+		{
+			ui.ShowGui = false;
+		}
+	}
+	
+	public void setupDatabaseDropdown( GuiComboBox Databases )
+	{
+		try 
+		{	
+			if( MyMeta.IsConnected )
+			{
+				Databases.BindData( MyMeta.Databases );
+				if( MyMeta.DefaultDatabase != null ) 
+				{
+					Databases.SelectedValue = MyMeta.DefaultDatabase.Alias;
+					bindTables( Databases.SelectedValue );
+					bindViews( Databases.SelectedValue );
+				}
+			}
+		}
+		catch
+		{
+		}
+	}
+	
+	public void bindTables( string sDatabase )
+	{
+		int count = 0;
+	
+		GuiListBox lstTables = ui["chooseTables"] as GuiListBox;
+		
+		try 
+		{	
+			IDatabase db = MyMeta.Databases[sDatabase];
+			lstTables.BindData( db.Tables );
+		}
+		catch
+		{
+		}
+	}
+	
+	public void bindViews( string sDatabase )
+	{
+		int count = 0;
+	
+		GuiListBox lstViews = ui["chooseViews"] as GuiListBox;
+		
+		try 
+		{	
+			IDatabase db = MyMeta.Databases[sDatabase];
+			lstViews.BindData( db.Views );
+		}
+		catch
+		{
+		}
+	}
+	
+	public void chooseDatabase_onchange( GuiComboBox control )
+	{
+		int count = 0;
+
+		GuiComboBox cmbDatabases = ui["chooseDatabase"] as GuiComboBox;
+	
+		bindTables( cmbDatabases.SelectedText );
+		bindViews( cmbDatabases.SelectedText );
+	}
+	
+}
+##|GUI_END
+##|BODY_MODE Markup
+##|BODY_ENGINE .Net Script
+##|BODY_LANGUAGE C#
+##|BODY_TAG_START <%
+##|BODY_TAG_END %>
+##|BODY_BEGIN
+<%#NAMESPACE System.IO, System.Text, System.Text.RegularExpressions, System.Globalization %><%
+// $Id: CSharp_IBatis_BusinessObject.csgen,v 1.3 2005/12/15 23:57:34 morciuch Exp $
+public class GeneratedTemplate : DotNetScriptTemplate
+{
+	private ArrayList _selectedTables;
+	private ArrayList _selectedViews;
+	private string _dbName;
+	private string _tableName;
+	private string _className;
+	private string _exportPath;
+	private string _exportPathXml;
+	private string _fileName;
+	private string _nameSpace;
+	private string _assemblyName;
+	private string _prefix;
+	private bool _createClassFiles;
+	private bool _createXmlFiles;
+	private bool _createReadOnly;
+	private bool _generateEqualsHashCode;
+	private bool _castDecimalsAsReal;
+	private int _indentLevel = 0;
+	
+	public GeneratedTemplate( ZeusContext context ) : base( context ) {}
+
+	public override void Render()
+	{
+		_dbName = input["chooseDatabase"].ToString();
+		_selectedTables = input["chooseTables"] as ArrayList;
+		_selectedViews = input["chooseViews"] as ArrayList;
+		_exportPath = input["outputPath"].ToString();
+		_exportPathXml = input["outputPathXML"].ToString();
+		_nameSpace = input["classNamespace"].ToString();
+		_assemblyName = input["assemblyName"].ToString();
+		_prefix = input["memberPrefix"].ToString();
+		_createClassFiles = (bool)input["chkClass"];
+		_createXmlFiles = (bool)input["chkMapping"];
+		_createReadOnly = (bool)input["chkReadOnly"];
+		_generateEqualsHashCode = (bool)input["chkEqualsHashCode"];
+		_castDecimalsAsReal = (bool)input["chkCastAsReal"];		
+		
+		foreach( string _newTable in _selectedTables )
+		{
+			ITable _workingTable = MyMeta.Databases[_dbName].Tables[_newTable];
+			_tableName = _workingTable.Alias.Replace( " ", "" );
+			_className = ToPascalCase( _tableName );
+			if( _createClassFiles )
+			{
+				GenerateClassFile( _workingTable.Columns );
+			}
+			if( _createXmlFiles )
+			{
+				GenerateMappingFile( _workingTable.Columns );
+			}
+		}
+		
+		foreach( string _newView in _selectedViews )
+		{
+			IView _workingView = MyMeta.Databases[_dbName].Views[_newView];
+			_tableName = _workingView.Alias.Replace( " ", "" );
+			_className = ToPascalCase( _tableName );
+			if( _createClassFiles )
+			{
+				GenerateClassFile( _workingView.Columns );
+			}
+			if( _createXmlFiles )
+			{
+				GenerateMappingFile( _workingView.Columns );
+			}
+		}
+	}
+	
+	private void GenerateClassFile(IColumns Columns)
+	{%>/*
+This file is generated by MyGeneration 1.3.0.3
+Created By: Anders Cui
+Created On: <%= DateTime.Now.ToString() %>
+*/
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
+namespace <%= _nameSpace %>
+{
+	/// <summary>
+	///	Domain class of table [<%= _tableName %>].
+	/// </summary>
+	[Serializable]
+	public partial class <%= _className %>
+	{
+		<% BuildPrivateMembers(Columns); %>
+		
+		<% BuildDefaultConstructor(Columns); %>
+		<% //BuildRequiredConstructor(Columns); %>
+		<% BuildPublicAccessors(Columns); %>
+		<% if( _generateEqualsHashCode ) BuildEqualsHashCodeOverrides(Columns); %>
+	}
+}
+<%
+		_fileName = _className + ".cs";
+		output.save(Path.Combine( _exportPath, _fileName ), false);
+		output.clear();
+	}
+	
+	private void GenerateMappingFile( IColumns Columns )
+	{
+		BuildXMLDefinition( Columns );
+		
+		_fileName = _className + ".xml";
+		output.save( Path.Combine( _exportPathXml, _fileName ), false );
+		output.clear();
+	}
+	
+	// Modified by Anders
+	private void BuildDefaultConstructor(IColumns columns)
+	{
+		%>#region Default constuctors
+		
+		/// <summary>
+		/// Instantiates an empty Resource for inserting.
+		/// </summary>
+		public <%= _className %>() { }
+		
+		/// <summary>
+		/// Retrieves Resource with Id for updating.
+		/// </summary>
+		public <%= _className %>(<% OutputPKParameters(columns); %>)
+		{
+<% OutputPKInitStatements(columns); %>
+		}
+		
+		#endregion <%
+	}
+	
+	private void OutputPKParameters(IColumns columns)
+	{
+		bool first = true;
+		foreach(IColumn col in columns)
+		{
+			if(col.IsInPrimaryKey)
+			{
+				if(!first) output.write( ", " );
+				output.write(ColumnToIBatisType(col) + " " + ColumnToArgumentName(col));
+				first = false;
+			}
+		}
+	}
+	
+	private void OutputPKInitStatements(IColumns columns)
+	{
+		bool first = true;
+		output.tabLevel = 3;
+		foreach(IColumn col in columns)
+		{
+			if(col.IsInPrimaryKey)
+			{
+				if(!first) output.writeln("");
+				output.autoTab("this." + ColumnToMemberVariable(col) + " = " + ColumnToArgumentName(col) + ";");
+				first = false;
+			}
+		}
+		output.tabLevel = 0;
+	}
+	
+	private void BuildFullConstructor(IColumns Columns)
+	{
+		%>#region Full Constructor
+		/// <summary>
+		/// full constructor
+		/// </summary>
+		public <%= _className %>(<%
+		bool first = true;
+		foreach( IColumn field in Columns )
+		{
+			if( !first ) output.write( ", " );
+			//output.write( ( field.IsInForeignKey && !field.IsInPrimaryKey ? ToPascalCase( field.ForeignKeys[0].PrimaryTable.Alias.Replace( " ", "" ) ) : ColumnToIBatisType( field ) ) + " " + ColumnToArgumentName( field ) );
+			output.write( ColumnToIBatisType( field ) + " " + ColumnToArgumentName( field ) );			
+			first = false;
+		}%>)
+		{<%
+				foreach( IColumn col in Columns )
+				{
+					%>
+			<%= ColumnToMemberVariable( col ) %> = <%= ColumnToArgumentName( col ) %>; <%
+				}
+			%>
+		}
+		#endregion // End Full Constructor<%
+	}
+	
+	private void BuildEqualsHashCodeOverrides( IColumns Columns )
+	{
+		%>
+		#region Equals And HashCode Overrides
+		/// <summary>
+		/// local implementation of Equals based on unique value members
+		/// </summary>
+		public override bool Equals( object obj )
+		{
+			if( this == obj ) return true;
+			if( ( obj == null ) || ( obj.GetType() != this.GetType() ) ) return false;
+			<%= _className %> castObj = (<%= _className %>)obj; <%
+		if( CountUniqueFields( Columns ) == 0 )
+		{%>
+			return castObj.GetHashCode() == this.GetHashCode()<%
+		}
+		else
+		{%>
+			return ( castObj != null )<%
+			foreach( IColumn c in Columns )
+			{
+				if( c.IsInPrimaryKey )
+				{
+				%> &&
+				( this.<%= ColumnToMemberVariable( c ) %> == castObj.<%= ColumnToPropertyName( c ) %> )<%
+				}
+			}
+		} %>;
+		}
+		
+		/// <summary>
+		/// local implementation of GetHashCode based on unique value members
+		/// </summary>
+		public override int GetHashCode()
+		{
+			<% if( CountUniqueFields( Columns ) == 0 )
+			{
+				%>return this.GetType().FullName.GetHashCode();
+				<%
+			}
+			else
+			{%>
+			int hash = 57; <%
+				foreach( IColumn c in Columns )
+				{
+					if( c.IsInPrimaryKey )
+					{
+			%>
+			hash = 27 * hash * <%= ColumnToMemberVariable( c ) %>.GetHashCode();<%
+					}
+				}
+				%>
+			return hash; <%
+			}%>
+		}
+		#endregion
+		<%
+	}
+	
+	// Bookmarked by Anders.
+	private void BuildPrivateMembers(IColumns Columns)
+	{
+		if( Columns.Count > 0)
+		{
+			%>#region Private fields
+		<%
+		foreach( IColumn field in Columns)
+		{
+			if(field.IsInPrimaryKey)
+			{%>
+		private <%= ColumnToIBatisType(field) %> <%= ColumnToMemberVariable(field) %>;
+			<%}
+		}
+		%><%
+		
+		foreach( IColumn field in Columns )
+		{
+			//if( field.IsInForeignKey && !field.IsInPrimaryKey )
+			if( 1 == 2 )
+			{%>
+		private <%= ToPascalCase( field.ForeignKeys[0].PrimaryTable.Alias.Replace( " ", "" ) ) %> <%= ColumnToMemberVariable( field ) %>; <%
+			}
+			else if(!field.IsInPrimaryKey)
+			{%>
+		private <%= ColumnToIBatisType( field ) %> <%= ColumnToMemberVariable( field ) %><%= GetDefaultValue(field) %>;<%
+			}
+		}
+%>
+
+		#endregion<%
+		}
+	}
+	
+	private void BuildInternalAccessors( IColumns Columns )
+	{
+		if( Columns.Count > 0 )
+		{
+		%>#region Internal Accessors for NHibernate
+		<%
+			foreach( IColumn field in Columns )
+			{
+				string fieldAccessor = ColumnToIBatisProperty( field );
+				string fieldName = ColumnToMemberVariable( field );
+			%>
+		#region <%= fieldAccessor %>
+		/// <summary>
+		/// <%= field.Description %>
+		/// </summary>
+		internal <%= ColumnToIBatisType( field ) %> <%= fieldAccessor %>
+		{
+			get { return <%= fieldName %>; }
+			set { <%= fieldName %> = value; }
+		}
+		#endregion
+		<%
+			}
+%>
+		#endregion // Internal Accessors for NHibernate <%
+		}
+	}
+	
+	private void BuildPublicAccessors( IColumns Columns )
+	{
+		if(Columns.Count > 0)
+		{
+			%>#region Public properties
+			<%
+			foreach(IColumn field in Columns)
+			{
+				string fieldAccessor = ColumnToPropertyName(field);
+				string fieldName = ColumnToMemberVariable( field );
+				//string fieldType = ( field.IsInForeignKey && !field.IsInPrimaryKey ? ToPascalCase( field.ForeignKeys[0].PrimaryTable.Alias.Replace( " ", "" ) ) : ColumnToIBatisType( field ) );
+				string fieldType = ColumnToIBatisType( field );%>
+		public <%= fieldType %> <%= fieldAccessor %>
+		{
+			get { return <%= fieldName %>; }
+			set { <%= fieldName %> = value; }
+		}
+			<%}%>		
+		#endregion<%
+		}
+	}
+	
+	private void BuildPublicFunctions(IColumns Columns)
+	{%>
+		#region Public Functions
+		
+		/// <summary>
+		/// mark the item as deleted
+		/// </summary>
+		public void MarkAsDeleted()
+		{
+			<%= _prefix %>isDeleted = true;
+			<%= _prefix %>isChanged = true;
+		}
+		
+		#endregion<%
+	}
+	
+	private void BuildXMLDefinition( IColumns Columns )
+	{
+		if( Columns.Count > 0 )
+		{
+			output.writeln( "<?xml version=\"1.0\" encoding=\"utf-8\" ?>" );
+			
+			output.writeln( IBatisSqlMapTag() );
+			
+			output.write(GetTabStrings(1));
+			output.writeln( "<alias>" );
+			_indentLevel = 1;
+			output.writeln( "\t" + IBatisAliasTag() );
+			_indentLevel = 0;
+			output.write(GetTabStrings(1));
+			output.writeln( "</alias>" );
+			
+			output.write(GetTabStrings(1));
+			output.writeln( "<resultMaps>" );
+			_indentLevel = 1;
+			output.writeln( IBatisResultMap( Columns ) );
+			_indentLevel = 0;
+			output.write(GetTabStrings(1));
+			output.writeln( "</resultMaps>" );
+			
+			
+			output.write(GetTabStrings(1));
+			output.writeln( "<statements>" );
+			_indentLevel = 1;
+			output.writeln(IBatisStatements( Columns ) );
+			_indentLevel = 0;
+			output.write(GetTabStrings(1));
+			output.writeln( "</statements>" );
+			
+			output.writeln( "</sqlMap>" );
+		}
+	}
+	
+	private string IBatisSqlMapTag()
+	{
+		return "<sqlMap namespace=\"" + _className + "Map\" xmlns=\"http://ibatis.apache.org/mapping\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\">";
+	}
+
+	private string IBatisAliasTag()
+	{
+		object[] args = {_className, _assemblyName, _nameSpace, _className};							
+		return string.Format("\t<typeAlias alias=\"{0}\" type=\"{2}.{3}, {1}\" />", args);
+	}
+		
+	private string IBatisResultMap( IColumns Columns )
+	{
+		StringBuilder xml = new StringBuilder();
+		
+		object[] args = {_className, _className};
+		xml.Append(GetTabStrings(1));
+		xml.AppendLine(string.Format("<resultMap id=\"{0}Result\" class=\"{1}\">", args));
+		foreach( IColumn c in Columns )
+		{
+			object[] args1 = {
+					ColumnToPropertyName(c), 
+					c.Name, 
+					CLRTypeToIBatisType(c), 
+					CLRTypeToDbType(c)};
+			xml.Append(GetTabStrings(2));
+			xml.AppendLine(string.Format("<result property=\"{0}\" column=\"{1}\" type=\"{2}\" dbType=\"{3}\"/>", args1));
+		}
+		xml.Append(GetTabStrings(1)).Append("</resultMap>");
+		return xml.ToString();
+	}
+	
+	private string IBatisStatements( IColumns Columns )
+	{
+		StringBuilder xml = new StringBuilder();
+		xml.Append(GetInsertStatement(Columns));
+		xml.Append(GetUpdateStatement(Columns));
+		xml.Append(GetDeleteStatement(Columns));
+		xml.Append(GetSelectStatement(Columns));
+		xml.Append(GetSelectAllStatement(Columns));
+		return xml.ToString();
+	}
+	
+	private string GetTabStrings(int count)
+	{
+		return new string('\t', count + _indentLevel);
+	}
+
+	private string GetSelectStatement( IColumns Columns )
+	{
+		StringBuilder xml = new StringBuilder();
+		
+		IColumn pk = GetPrimaryKey(Columns);
+		
+		// TODO: pk's data type -> C# or VB.NET type.
+		object[] args = {_className, CLRTypeToIBatisType(pk), _className};
+		xml.AppendLine();
+		xml.Append(GetTabStrings(1));
+		xml.AppendLine(string.Format("<select id=\"Select{0}ById\" parameterClass=\"{1}\" resultMap=\"{2}Result\">", args));
+		
+		xml.Append(GetTabStrings(2));
+		xml.Append("SELECT ");
+		bool first = true;
+		foreach( IColumn c in Columns )
+		{
+			if (!first) xml.Append(", ");
+			first = false;
+			if (_castDecimalsAsReal && 
+				CLRTypeToIBatisType(c).Equals("single") && 
+				MyMeta.Driver == dbDriver.SQL)
+			{
+				object[] args1 = {c.Name, ColumnToPropertyName(c)};
+				xml.Append(string.Format("CAST ({0} AS REAL) AS {1}", args1));
+			}
+			else
+			{
+				xml.Append(c.Name).Append(" AS ").Append(ColumnToPropertyName(c));	
+			}
+		}
+		xml.AppendLine();
+		
+		xml.Append(GetTabStrings(2));
+		xml.Append("FROM ").AppendLine(GetTable(Columns).Name);
+		
+		if (pk != null)
+		{
+			xml.Append(GetTabStrings(2));
+			xml.Append("WHERE ").Append(pk.Name).Append("= #").Append(ColumnToPropertyName(pk)).Append("#");
+		}
+		
+		xml.AppendLine();
+		xml.Append(GetTabStrings(1));
+		xml.Append("</select>");
+		return xml.ToString();
+	}
+	
+	private string GetSelectAllStatement( IColumns Columns )
+	{
+		StringBuilder xml = new StringBuilder();
+		
+		object[] args = {_className, _className};
+		xml.AppendLine();
+		xml.Append(GetTabStrings(1));
+		xml.AppendLine(string.Format("<select id=\"SelectAll{0}\" resultMap=\"{1}Result\">", args));
+		
+		xml.Append(GetTabStrings(2));
+		xml.Append("SELECT ");
+		bool first = true;
+		foreach( IColumn c in Columns )
+		{
+			if (!first) xml.Append(", ");
+			first = false;
+			if (_castDecimalsAsReal && 
+				CLRTypeToIBatisType(c).Equals("single") && 
+				MyMeta.Driver == dbDriver.SQL)
+			{
+				object[] args1 = {c.Name, ColumnToPropertyName(c)};
+				xml.Append(string.Format("CAST ({0} AS REAL) AS {1}", args1));
+			}
+			else
+			{
+				xml.Append(c.Name).Append(" AS ").Append(ColumnToPropertyName(c));	
+			}
+		}
+		xml.AppendLine();
+		
+		xml.Append(GetTabStrings(2));
+		xml.Append("FROM ").AppendLine(GetTable(Columns).Name);
+		
+		xml.Append(GetTabStrings(1));
+		xml.Append("</select>");
+		return xml.ToString();
+	}
+
+	private string GetInsertStatement( IColumns Columns )
+	{
+		IColumn autoPk = GetAutoIncrementKey(Columns);
+		StringBuilder xml = new StringBuilder();
+		object[] args = {_className, _className};
+		
+		xml.Append(GetTabStrings(1));
+		xml.AppendLine(string.Format("<insert id=\"Insert{0}\" parameterClass=\"{1}\">", args));
+		
+		xml.Append(GetTabStrings(2));
+		xml.Append("INSERT INTO ").Append(GetTable(Columns).Name).Append(" (");
+		bool first = true;
+		foreach( IColumn c in Columns )
+		{
+			if (!c.Equals(autoPk))
+			{
+				if (!first) xml.Append(", ");
+				first = false;
+				xml.Append(c.Name);			
+			}
+		}
+		xml.AppendLine(") ");
+		
+		xml.Append(GetTabStrings(2));
+		xml.Append("VALUES (");
+		first = true;
+		foreach( IColumn c in Columns )
+		{
+			if (!c.Equals(autoPk))
+			{
+				if (!first) xml.Append(", ");
+				first = false;
+				xml.Append("#").Append(ColumnToPropertyName(c));
+				if (c.LanguageType.Equals("DateTime"))
+				{
+					xml.Append(":DateTime:1/1/0001 12:00:00 AM");
+				}
+				xml.Append("#");
+			}
+		}
+		xml.AppendLine(") ");
+		
+		// Get the newly generated identity key value.
+		IColumn pk = GetPrimaryKey(Columns);
+		if (pk != null && pk.IsAutoKey)
+		{
+			object[] arg2 = {ColumnToPropertyName(pk)};
+			xml.Append(GetTabStrings(2));
+			xml.AppendLine(string.Format("<selectKey resultClass=\"int\" type=\"post\" property=\"{0}\">", arg2));
+			xml.Append(GetTabStrings(3));
+			xml.AppendLine("SELECT @@IDENTITY as value");
+			xml.Append(GetTabStrings(2));
+			xml.AppendLine("</selectKey>");
+		}
+		
+		xml.Append(GetTabStrings(1));
+		xml.AppendLine("</insert>");
+		return xml.ToString();
+	}
+
+	private string GetUpdateStatement(IColumns Columns )
+	{
+		IColumn autoPk = GetAutoIncrementKey(Columns);
+		StringBuilder xml = new StringBuilder();
+		
+		object[] args = {_className};
+		xml.Append(GetTabStrings(1));
+		xml.AppendLine(string.Format("<update id=\"Update{0}\" parameterClass=\"{0}\">", args));
+		xml.Append(GetTabStrings(2));
+		xml.Append("UPDATE ").AppendLine(GetTable(Columns).Name);
+		
+		// Set clause.
+		xml.Append(GetTabStrings(2)).Append("SET ");
+		bool first = true;
+		foreach(IColumn c in Columns)
+		{
+			if (!c.Equals(autoPk))
+			{
+				if (!first) xml.Append(", ");
+				first = false;
+				xml.Append(c.Name).Append("= ").Append("#").Append(ColumnToPropertyName(c)).Append("#");			
+			}
+		}
+		xml.AppendLine();
+		
+		// Where clause.
+		IColumn pk = GetPrimaryKey(Columns);
+		if (pk != null)
+		{
+			xml.Append(GetTabStrings(2));
+			xml.Append("WHERE ").Append(pk.Name).Append("= #").Append(ColumnToPropertyName(pk)).Append("#");
+		}
+		xml.AppendLine();
+		
+		// Ending
+		xml.Append(GetTabStrings(1)).AppendLine("</update>");
+		return xml.ToString();
+	}
+
+	private string GetDeleteStatement(IColumns Columns )
+	{
+		StringBuilder xml = new StringBuilder();
+		
+		IColumn pk = GetPrimaryKey(Columns);
+		object[] args = {_className, CLRTypeToIBatisType(pk)};
+		
+		xml.Append(GetTabStrings(1));
+		xml.AppendLine(string.Format("<delete id=\"Delete{0}\" parameterClass=\"{1}\">", args));
+		
+		xml.Append(GetTabStrings(2));
+		xml.Append("DELETE FROM ").AppendLine(GetTable(Columns).Name);
+		
+		if (pk != null)
+		{
+			xml.Append(GetTabStrings(2));
+			xml.Append("WHERE ").Append(pk.Name).Append("= #value#");
+			xml.AppendLine();
+		}
+		
+		xml.Append(GetTabStrings(1)).Append("</delete>");
+		return xml.ToString();
+	}
+
+	private IColumn GetPrimaryKey(IColumns Columns)
+	{
+		foreach(IColumn c in Columns)
+		{
+			if (c.IsInPrimaryKey) return c;			
+		}
+		
+		return null;
+	}
+	
+	private IColumn GetAutoIncrementKey(IColumns Columns)
+	{
+		foreach(IColumn c in Columns)
+		{
+			if (c.IsInPrimaryKey && c.IsAutoKey) return c;			
+		}
+		
+		return null;
+	}
+	
+
+	private ITable GetTable(IColumns Columns)
+	{
+		foreach(IColumn c in Columns)
+		{
+			return c.Table;			
+		}
+		
+		return null;
+	}
+
+	// Convert CLR type to SqlDbType
+	private string CLRTypeToDbType( IColumn Column )
+	{
+		string retVal = Column.LanguageType;
+		
+		switch( Column.LanguageType )
+		{
+			case "Byte[]":
+			case "byte[]":			
+				retVal = "Binary";
+				break;
+			case "Boolean":
+				retVal = "Bit";
+				break;
+			case "Byte":
+				retVal = "TinyInt";
+				break;
+			case "DateTime":
+				retVal = "DateTime";
+				break;
+			case "decimal":
+				retVal = "Real";
+				break;
+			case "numeric":
+				retVal = "Real";
+				break;
+			case "float":
+				retVal = "Real";
+				break;
+			case "double":
+				retVal = "Real";
+				break;
+			case "int":
+				retVal = "Int";
+				break;
+			case "Int16":
+				retVal = "SmallInt";
+				break;
+			case "Int32":
+				retVal = "Int";
+				break;
+			case "Int64":
+				retVal = "BigInt";
+				break;
+			case "string":
+				retVal = "varchar";
+				break;
+			case "single":
+				retVal = "Real";
+				break;
+			case "UInt16":
+				retVal = "Int";
+				break;
+			case "UInt32":
+				retVal = "Decimal";
+				break;				
+		}
+		
+		return retVal;
+	}
+
+	// Convert CLR type to IBatis type alias
+	private string CLRTypeToIBatisType( IColumn Column )
+	{
+		string retVal = Column.LanguageType;
+		
+		switch( Column.LanguageType )
+		{
+			case "numeric":
+				retVal = "single";
+				break;
+			case "decimal":
+				retVal = "single";
+				break;
+			case "float":
+				retVal = "single";
+				break;
+			case "byte[]":
+				retVal = "Byte";
+				break;				
+		}
+		
+		return retVal;
+	}
+	
+	private string ColumnToMemberVariable(IColumn Column)
+	{
+		// TODO: 
+		return _prefix + ToCamelCase(UniqueColumn(Column));
+	}
+	
+	private string ColumnToPropertyName(IColumn Column)
+	{
+		return ToPascalCase( UniqueColumn( Column ) );
+	}
+	
+	private string ColumnToArgumentName(IColumn Column)
+	{
+		return ToCamelCase(UniqueColumn(Column));
+	}
+	
+	private string ColumnToIBatisProperty( IColumn Column )
+	{
+		return _prefix + UniqueColumn( Column );
+	}
+	
+	private string UniqueColumn( IColumn Column )
+	{
+		string c = Column.Alias.Replace( " ", "" );
+		if( Column.Table != null && Column.Table.Alias.Replace( " ", "" ) == c )
+		{
+			c += "Name";
+		}
+		if( Column.View != null && Column.View.Alias.Replace( " ", "" ) == c )
+		{
+			c += "Name";
+		}
+		return c;
+	}
+	
+	// TODO: Other types' default value.
+	private string GetDefaultValue(IColumn column)
+	{
+		//output.writeln(column.Name + "," + column.LanguageType);
+		if(column.LanguageType.ToLower() == "string")
+		{
+			return " = String.Empty";
+		}
+		
+		return String.Empty;
+	}
+	
+	// Add by Anders
+	private bool IsValueType(IColumn column)
+	{
+		string[] valueTypes = new string[]{ "sbyte", "uint", "tinyint", "byte", "int", 
+			"ulong", "long", "ushort", "short", "decimal", "float", "bool", 
+			"DateTime", "Guid" };
+		foreach (string type in valueTypes)
+		{
+			if (type == column.LanguageType) { return true; }
+		}
+		
+		return false;
+	}
+	
+	// ibatis doesn't support these, so use the existing types
+	private string ColumnToIBatisType( IColumn Column )
+	{
+		string retVal = Column.LanguageType;
+		bool shouldAddPostfix = IsValueType(Column) && !Column.IsInPrimaryKey && Column.IsNullable;
+		//output.writeln(shouldAddPostfix.ToString());
+		
+		switch( Column.LanguageType )
+		{
+			case "sbyte":
+				retVal = "byte";
+				break;
+			case "uint":
+			case "tinyint":	
+			case "byte":
+				retVal = "int";
+				break;
+			case "ulong":
+				retVal = "long";
+				break;
+			case "ushort":
+				retVal = "short";
+				break;
+			case "decimal":
+				retVal = "float";
+				break;
+		}
+		
+		if(shouldAddPostfix)
+		{
+			retVal += "?";
+		}
+		
+		return retVal;
+	}
+	
+	private string ToLeadingCaps( string name )
+	{
+		char[] chars = name.ToLower().ToCharArray();
+		chars[0] = Char.ToUpper( chars[0] );
+		return new string( chars );
+	}
+	
+	private string ToLeadingLower( string name )
+	{
+		char[] chars = name.ToCharArray();
+		chars[0] = Char.ToLower( chars[0] );
+		return new string( chars );
+	}
+	
+	private string ToPascalCase( string name )
+	{
+		string notStartingAlpha = Regex.Replace( name, "^[^a-zA-Z]+", "" );
+		string workingString = ToLowerExceptCamelCase( notStartingAlpha );
+		workingString = RemoveSeparatorAndCapNext( workingString );
+		return workingString;
+	}
+	
+	private string ToCamelCase( string name )
+	{
+		if(string.IsNullOrEmpty(name)) { return name; }
+		
+		char[] chars = name.ToCharArray();
+		chars[0] = char.ToLower(chars[0]);
+		string workingString = new string(chars);
+		//workingString = RemoveSeparatorAndCapNext( workingString );
+		return workingString;
+	}
+	
+	private string RemoveSeparatorAndCapNext( string input )
+	{
+		string dashUnderscore = "-_";
+		string workingString = input;
+		char[] chars = workingString.ToCharArray();
+		int under = workingString.IndexOfAny( dashUnderscore.ToCharArray() );
+		while( under > -1 )
+		{
+			chars[ under + 1 ] = Char.ToUpper( chars[ under + 1 ], CultureInfo.InvariantCulture );
+			workingString = new String( chars );
+			under = workingString.IndexOfAny( dashUnderscore.ToCharArray(), under + 1 );
+		}
+		chars[ 0 ] = Char.ToUpper( chars[ 0 ], CultureInfo.InvariantCulture );
+		workingString = new string( chars );
+		return Regex.Replace( workingString, "[-_]", "" );
+	}
+
+	private string ToLowerExceptCamelCase( string input )
+	{
+		char[] chars = input.ToCharArray();
+		for( int i = 0; i < chars.Length; i++ )
+		{
+			int left = ( i > 0 ? i - 1 : i );
+			int right = ( i < chars.Length - 1 ? i + 1 : i );
+			if( i != left && i != right )
+			{
+				if( Char.IsUpper( chars[i] ) && Char.IsLetter( chars[ left ] ) && Char.IsUpper( chars[ left ] ) )
+				{
+					chars[i] = Char.ToLower( chars[i], CultureInfo.InvariantCulture );
+				}
+				else if( Char.IsUpper( chars[i] ) && Char.IsLetter( chars[ right ] ) && Char.IsUpper( chars[ right ] ) )
+				{
+					chars[i] = Char.ToLower( chars[i], CultureInfo.InvariantCulture );
+				}
+				else if( Char.IsUpper( chars[i] ) && !Char.IsLetter( chars[ right ] ) )
+				{
+					chars[i] = Char.ToLower( chars[i], CultureInfo.InvariantCulture );
+				}
+			}
+		}
+		chars[ chars.Length - 1 ] = Char.ToLower( chars[ chars.Length - 1 ], CultureInfo.InvariantCulture );
+		return new string( chars );
+	}
+	
+	private int CountRequiredFields( IColumns Columns )
+	{
+		// TODO:
+		//int nullables = CountNullableFields( Columns );
+		//output.write("nullable: ");
+		//output.write(nullables.ToString());
+		return Columns.Count - CountNullableFields( Columns );
+	}
+	
+	private int CountNullableFields( IColumns Columns )
+	{
+		int i = 0;
+		foreach( IColumn c in Columns )
+		{
+			if( c.IsNullable )
+			{
+				i++;
+			}
+		}
+		return i;
+	}
+	
+	private int CountUniqueFields( IColumns Columns )
+	{
+		int i = 0;
+		foreach( IColumn c in Columns )
+		{
+			if( !c.IsNullable && c.IsInPrimaryKey )
+			{
+				i++;
+			}
+		}
+		return i;
+	}
+}
+%>
+##|BODY_END

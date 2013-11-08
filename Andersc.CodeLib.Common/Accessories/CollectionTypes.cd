@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Interface Name="System.Collections.Generic.ISet&lt;T&gt;">
+    <Position X="4.75" Y="2.25" Width="2" />
+    <InheritanceLine Type="System.Collections.Generic.IEnumerable&lt;T&gt;" ManuallyRouted="true">
+      <Path>
+        <Point X="2.875" Y="2.48" />
+        <Point X="2.875" Y="2.8" />
+        <Point X="4.05" Y="2.8" />
+        <Point X="4.05" Y="1.95" />
+        <Point X="5.75" Y="1.95" />
+        <Point X="5.75" Y="2.25" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier />
+  </Interface>
+  <Interface Name="System.Collections.Generic.ICollection&lt;T&gt;">
+    <Position X="2" Y="3" Width="1.5" />
+    <TypeIdentifier />
+  </Interface>
+  <Interface Name="System.Collections.Generic.IEnumerable&lt;T&gt;">
+    <Position X="2" Y="1.25" Width="1.75" />
+    <TypeIdentifier />
+  </Interface>
+  <Font Name="Tahoma" Size="9.75" />
+</ClassDiagram>

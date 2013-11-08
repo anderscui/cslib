@@ -1,0 +1,65 @@
+﻿----------------------
+Requirements:
+
+a. Data Item:
+
+1. Category:
+	like ToRead(Book or Article), ToWrite(Blog, article, book), TpWatch(
+
+2. Status
+	Reading/Writing/Watching/Doing...; WantToRead; Have Read; None(just data item)
+
+
+3. Priority
+
+4. Tag
+
+5. Score (1 to 10)
+
+6. Comment
+
+7. StartOn, EndOn
+
+8. Other info: title/description/link/fileinfo/
+
+b. Init default data; Backup data; 
+
+c. Retrieve data from douban/mtime or other websites.
+
+
+----------------------
+Design:
+
+data: 
+
+Master data: category, status, priority, score.
+Application data: 
+All the data are stored in XML, but it should be easily changed.(to SQL DB, Sqlite, MySQL...)
+
+for XML, use schema to constraint data, just as Constraints in SQL DB.
+
+for TodoItem link prop, it could be local path or remote URL.
+
+view:
+should easily changed to WinForms, WPF, ASP.NET MVC application.
+
+OOD:
+
+At the beginning, could load all data when start, and improve it later.
+
+Exception:
+Consistent exception handling
+
+----------------------
+Tech:
+C#3.0, 4.0; LINQ to Objects/XML; Network pro; 
+
+
+TODO:
+1. XML Schemas;
+2. Data file def; OK
+3. Model classes; OK
+4. Logic interfaces, impls;
+5. Presentations;
+6. Load all data;
+7. Data Access types;

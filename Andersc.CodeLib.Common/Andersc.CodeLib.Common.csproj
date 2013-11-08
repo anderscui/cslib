@@ -1,0 +1,264 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{99BE9DB1-3885-4B20-B048-175878CF3D4E}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Andersc.CodeLib.Common</RootNamespace>
+    <AssemblyName>Andersc.CodeLib.Common</AssemblyName>
+    <SccProjectName>
+    </SccProjectName>
+    <SccLocalPath>
+    </SccLocalPath>
+    <SccAuxPath>
+    </SccAuxPath>
+    <SccProvider>
+    </SccProvider>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <OldToolsVersion>3.5</OldToolsVersion>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <IsWebBootstrapper>true</IsWebBootstrapper>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <PublishUrl>http://localhost/CodeLib.Common/</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Web</InstallFrom>
+    <UpdateEnabled>true</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DocumentationFile>
+    </DocumentationFile>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Release\CodeLib.xml</DocumentationFile>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="log4net, Version=1.2.10.0, Culture=neutral, PublicKeyToken=1b44e1d426115821, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\ExternalBin\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.SQLite, Version=1.0.85.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\System.Data.SQLite.1.0.85.0\lib\net40\System.Data.SQLite.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Data.SQLite.Linq, Version=1.0.85.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\System.Data.SQLite.1.0.85.0\lib\net40\System.Data.SQLite.Linq.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="Velocit.RegularExpressions, Version=1.0.0.0, Culture=neutral">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\ExternalBin\Velocit.RegularExpressions.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="BooleanExtension.cs" />
+    <Compile Include="CodeTimer.cs" />
+    <Compile Include="Collections\ANode.cs" />
+    <Compile Include="Collections\ATree.cs" />
+    <Compile Include="Collections\AvlNode.cs" />
+    <Compile Include="Collections\AvlTree.cs" />
+    <Compile Include="Collections\BinarySearchTree.cs" />
+    <Compile Include="Collections\BinaryTree.cs" />
+    <Compile Include="Collections\BinaryTreeNode.cs" />
+    <Compile Include="Collections\CollectionEmptyException.cs" />
+    <Compile Include="Collections\DoublyLinkedList.cs" />
+    <Compile Include="Collections\DuplicateItemException.cs" />
+    <Compile Include="Collections\DynamicArray.cs" />
+    <Compile Include="Collections\ElementNotFoundException.cs" />
+    <Compile Include="Collections\HashSet.cs" />
+    <Compile Include="Collections\IContainer.cs" />
+    <Compile Include="Collections\IQueue.cs" />
+    <Compile Include="Collections\IStack.cs" />
+    <Compile Include="Collections\LinkedListNode.cs" />
+    <Compile Include="Collections\PriorityQueue.cs" />
+    <Compile Include="Collections\Queue.cs" />
+    <Compile Include="Collections\Range.cs" />
+    <Compile Include="Collections\GenericSet.cs" />
+    <Compile Include="Collections\RedBlackTree.cs" />
+    <Compile Include="Collections\SinglyLinkedList.cs" />
+    <Compile Include="Collections\SinglyLinkedListNode.cs" />
+    <Compile Include="Collections\Stack.cs" />
+    <Compile Include="Collections\StackUnderflowException.cs" />
+    <Compile Include="ConfigManager.cs" />
+    <Compile Include="ConvertHelper.cs" />
+    <Compile Include="ConversionExtension.cs" />
+    <Compile Include="Data\Broker.cs" />
+    <Compile Include="Data\DataManipulation.cs" />
+    <Compile Include="Data\DBFactory.cs" />
+    <Compile Include="Data\DBHelper.cs" />
+    <Compile Include="Data\SQLiteHelper.cs" />
+    <Compile Include="Data\SqlMapObject.cs" />
+    <Compile Include="Data\SqlResult.cs" />
+    <Compile Include="Data\StatementType.cs" />
+    <Compile Include="DateTimeHelper.cs" />
+    <Compile Include="DebuggerWriter.cs" />
+    <Compile Include="Drawing\CaptchaImage.cs" />
+    <Compile Include="EnumerableExtension.cs" />
+    <Compile Include="EnvironmentHelper.cs" />
+    <Compile Include="Extension\ArrayExtension.cs" />
+    <Compile Include="Extension\CharExtension.cs" />
+    <Compile Include="Extension\ConsoleExtension.cs" />
+    <Compile Include="Extension\DictionaryExtension.cs" />
+    <Compile Include="Extension\LinqToXmlExtension.cs" />
+    <Compile Include="FileIOExtension.cs" />
+    <Compile Include="FclHashSet.cs" />
+    <Compile Include="MathHelper.cs" />
+    <Compile Include="Maths\Complex.cs" />
+    <Compile Include="Maths\DenseMatrix.cs" />
+    <Compile Include="Maths\Maths.cs" />
+    <Compile Include="Maths\Matrix.cs" />
+    <Compile Include="Maths\NumberTheory.cs" />
+    <Compile Include="Maths\Polynomial.cs" />
+    <Compile Include="Network\HttpRequestHelper.cs" />
+    <Compile Include="ObjectDumper.cs" />
+    <Compile Include="ObjectExtension.cs" />
+    <Compile Include="ObjectHelper.cs" />
+    <Compile Include="OppsiteComparer.cs" />
+    <Compile Include="Pair.cs" />
+    <Compile Include="RandomGenerator.cs" />
+    <Compile Include="RegistryHelper.cs" />
+    <Compile Include="Searching\IntArraySearcher.cs" />
+    <Compile Include="Sorting\IntArraySorter.cs" />
+    <Compile Include="Sorting\OrderOption.cs" />
+    <Compile Include="StringExtension.cs" />
+    <Compile Include="Triplet.cs" />
+    <Compile Include="WebForm\CustomControl\CustomGridView.cs" />
+    <Compile Include="DataHelper.cs" />
+    <Compile Include="Data\SqlHelper.cs" />
+    <Compile Include="Encryption\DESEncryption.cs" />
+    <Compile Include="Encryption\HashEncryption.cs" />
+    <Compile Include="Encryption\RSAEncryptionManager.cs" />
+    <Compile Include="Encryption\RSAKeyGenerator.cs" />
+    <Compile Include="HtmlHelper.cs" />
+    <Compile Include="Mail\MailSender.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Serilization\SerializationHelper.cs" />
+    <Compile Include="StringHelper.cs" />
+    <Compile Include="WebConfigManager.cs" />
+    <Compile Include="WebForm\CustomControl\NumericTextBox.cs" />
+    <Compile Include="WebForm\GridViewHelper.cs" />
+    <Compile Include="WebForm\ControlManager.cs" />
+    <Compile Include="WebForm\ControlHelper.cs" />
+    <Compile Include="WebForm\HttpApplicationBase.cs" />
+    <Compile Include="WebForm\ScriptHelper.cs" />
+    <Compile Include="WebForm\ScriptLibrary.cs" />
+    <Compile Include="WebForm\SystemCtrlInfoManager.cs" />
+    <Compile Include="WebForm\WebControlExtension.cs" />
+    <Compile Include="WebHelper.cs" />
+    <Compile Include="WhoIsHelper.cs" />
+    <Compile Include="WinConfigManager.cs" />
+    <Compile Include="WinForm\WinFormExtension.cs" />
+    <Compile Include="XmlHelper.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Accessories\ChangeLog.txt" />
+    <Content Include="Accessories\JS\boxover.js" />
+    <Content Include="Accessories\PageValidator\PageValidator.xml" />
+    <Content Include="Readme.txt" />
+    <Content Include="TODO.txt" />
+    <Content Include="x64\SQLite.Interop.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="x86\SQLite.Interop.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Accessories\CodeSnippets\MyCsSnippets.snippet" />
+    <None Include="Accessories\CodeTemplates\IBatisDataMapper.cst" />
+    <None Include="Accessories\CodeTemplates\IBatisDomain.cst" />
+    <None Include="Accessories\CodeTemplates\IBatisDomainObject.csgen" />
+    <None Include="Accessories\CodeTemplates\SingletonClass.cst" />
+    <None Include="Accessories\CollectionTypes.cd" />
+    <None Include="Accessories\PageValidator\PageValidator.xsd">
+      <SubType>
+      </SubType>
+    </None>
+    <None Include="Accessories\PageValidator\PageValidator.xsx">
+      <DependentUpon>PageValidator.xsd</DependentUpon>
+    </None>
+    <None Include="Accessories\SystemIoTypes.cd" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.2.0">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 2.0 %28x86%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.0">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.0 %28x86%29</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="CustomException\" />
+    <Folder Include="Validation\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

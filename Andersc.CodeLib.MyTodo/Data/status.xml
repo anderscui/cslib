@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<statuses>
+    <status name="TODO">
+        <desc></desc>
+    </status>
+    <status name="Doing">
+        <desc></desc>
+    </status>
+    <status name="Done">
+        <desc></desc>
+    </status>
+</statuses>

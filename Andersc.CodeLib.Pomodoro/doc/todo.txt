@@ -1,0 +1,8 @@
+﻿1. a global, beautiful dialog or form;
+2. a notify icon;
+
+these two are the basic features.
+
+3. manage todo items like a calendar, so everyday you are clear what you are doing;
+	for an item, it has subject, memo, start_date, due_date, status(Not started, In progress, Completed), priority(Low, Normal, High), progress(0-100), reminder, category by color.
+	consider using SQLite.

@@ -1,0 +1,52 @@
+<%-- 
+ * Template to generate a singleton pattern class
+ * Id: SingletonClass.cst 2007-04-09
+--%>
+<%@ CodeTemplate Language="C#" TargetLanguage="C#" Description="产生一个Singleton类的结构代码" %>
+<%@ Property Name="ClassName" Type="System.String" Category="Context" Description="类的名称" %>
+
+	#region Comments
+	
+	/// 创 建 人: {在这里添加创建人}
+	/// 创建日期: <%= System.DateTime.Now.ToShortDateString() %>
+	/// 修 改 人: 
+	/// 修改日期:
+	/// 修改内容:
+	/// 版    本: 1.0.0
+	
+	#endregion
+
+	#region Class <%= ClassName %>
+	
+	/// <summary>
+	/// 类<%= ClassName %>的概要。
+	/// </summary>
+	public sealed class <%= ClassName %>
+    {
+		// volatile instance.
+        private static volatile <%= ClassName %> instance = null;
+        private static readonly object padlock = new object();
+
+        private <%= ClassName %>()
+        {
+        }
+
+		// double-check mechanism.
+        public static <%= ClassName %> Instance()
+        {
+            if (instance == null)
+            {
+                lock (padlock)
+                {
+                    if (instance == null)
+                    {
+                        instance = new <%= ClassName %>();
+                    }
+                }
+            }
+
+            return instance;
+        }
+    }
+	
+	#endregion

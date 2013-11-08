@@ -1,0 +1,211 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{18D5D5B8-C364-4458-93D6-A058A2BC3AA5}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Andersc.CodeLib.Tester</RootNamespace>
+    <AssemblyName>Andersc.CodeLib.Tester</AssemblyName>
+    <SccProjectName>
+    </SccProjectName>
+    <SccLocalPath>
+    </SccLocalPath>
+    <SccAuxPath>
+    </SccAuxPath>
+    <SccProvider>
+    </SccProvider>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <OldToolsVersion>3.5</OldToolsVersion>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <IsWebBootstrapper>true</IsWebBootstrapper>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <PublishUrl>http://localhost/CodeLib.Tester/</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Web</InstallFrom>
+    <UpdateEnabled>true</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>.\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="log4net, Version=1.2.10.0, Culture=neutral, PublicKeyToken=1b44e1d426115821, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\ExternalBin\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="nunit.framework, Version=2.6.2.12296, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
+      <HintPath>..\packages\NUnit.2.6.2\lib\nunit.framework.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.Linq" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Xml.Linq" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Algorithm\Maths\TestMathSolver.cs" />
+    <Compile Include="Algorithm\TestCoinChangeProblem.cs" />
+    <Compile Include="Algorithm\TestEvaluator.cs" />
+    <Compile Include="Algorithm\TestGraph.cs" />
+    <Compile Include="Algorithm\TestKnapsackProblem.cs" />
+    <Compile Include="Algorithm\TestProjectEuler.cs" />
+    <Compile Include="Algorithm\TestQueens.cs" />
+    <Compile Include="Algorithm\TestSorters.cs" />
+    <Compile Include="Algorithm\TestStringMatcher.cs" />
+    <Compile Include="Algorithm\TestWordSearchPuzzle.cs" />
+    <Compile Include="Common\TestBitOperators.cs" />
+    <Compile Include="Common\TestDateTimeHelper.cs" />
+    <Compile Include="Common\TestDynamicLinqQuery.cs" />
+    <Compile Include="Common\TestEnvironmentHelper.cs" />
+    <Compile Include="Common\TestGenericSet.cs" />
+    <Compile Include="Common\TestIntArraySorter.cs" />
+    <Compile Include="Common\TestArrayExtension.cs" />
+    <Compile Include="Common\TestArray.cs" />
+    <Compile Include="Common\TestConsoleExtension.cs" />
+    <Compile Include="Common\TestDictionaryExtension.cs" />
+    <Compile Include="Common\TestEnumerableExtension.cs" />
+    <Compile Include="Common\TestExpressionTree.cs" />
+    <Compile Include="Common\TestGenerics.cs" />
+    <Compile Include="Common\TestMath.cs" />
+    <Compile Include="Common\TestMathHelper.cs" />
+    <Compile Include="Common\TestMyEnumerableExtension.cs" />
+    <Compile Include="Common\TestNumberTheory.cs" />
+    <Compile Include="Common\TestObjectDumper.cs" />
+    <Compile Include="Common\TestObjectExtension.cs" />
+    <Compile Include="Common\TestOppsiteComparer.cs" />
+    <Compile Include="Common\TestQueue.cs" />
+    <Compile Include="Common\TestRandomGenerator.cs" />
+    <Compile Include="Common\TestRange.cs" />
+    <Compile Include="Common\TestRegistryHelper.cs" />
+    <Compile Include="Common\TestSinglyLinkedList.cs" />
+    <Compile Include="Common\TestSortedList.cs" />
+    <Compile Include="Common\TestStack.cs" />
+    <Compile Include="Common\TestString.cs" />
+    <Compile Include="Common\TestStringExtension.cs" />
+    <Compile Include="Common\TestWhoIsService.cs" />
+    <Compile Include="DataStructure\TestATree.cs" />
+    <Compile Include="DataStructure\TestAvlTree.cs" />
+    <Compile Include="DataStructure\TestBinarySearchTree.cs" />
+    <Compile Include="DataStructure\TestBinaryTree.cs" />
+    <Compile Include="DataStructure\TestDynamicArray.cs" />
+    <Compile Include="DataStructure\TestHashSet.cs" />
+    <Compile Include="DataStructure\TestPriorityQueue.cs" />
+    <Compile Include="DataStructure\TestRedBlackTree.cs" />
+    <Compile Include="Douban\TestDoubanOAuth.cs" />
+    <Compile Include="FCL\TestString.cs" />
+    <Compile Include="FCL\TestProc.cs" />
+    <Compile Include="FCL\TestConversions.cs" />
+    <Compile Include="FCL\TestExpressions.cs" />
+    <Compile Include="FCL\TestFclHashSet.cs" />
+    <Compile Include="FCL\TestFileIO.cs" />
+    <Compile Include="FCL\TestNumbers.cs" />
+    <Compile Include="FCL\TestObjectHashCode.cs" />
+    <Compile Include="FCL\TestYield.cs" />
+    <Compile Include="Helpers\Book.cs" />
+    <Compile Include="Helpers\BoolHashCodeStruct.cs" />
+    <Compile Include="Helpers\Box.cs" />
+    <Compile Include="Helpers\Customer.cs" />
+    <Compile Include="Helpers\MyStruct.cs" />
+    <Compile Include="Helpers\OAuthBase.cs" />
+    <Compile Include="FCL\TestLinqs.cs" />
+    <Compile Include="Network\TestIpInfoDb.cs" />
+    <Compile Include="Network\TestParseHtmlResponse.cs" />
+    <Compile Include="Network\TestSearchEngineResults.cs" />
+    <Compile Include="Network\TestWhoisAPI.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TestNumbers.cs" />
+    <Compile Include="TestDoubanAPI.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.2.0">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 2.0 %28x86%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.0">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.0 %28x86%29</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Andersc.CodeLib.Algorithm\Andersc.CodeLib.Algorithm.csproj">
+      <Project>{D5FD778E-4A7F-4C14-A67E-D67F818DFB0F}</Project>
+      <Name>Andersc.CodeLib.Algorithm</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Andersc.CodeLib.Common\Andersc.CodeLib.Common.csproj">
+      <Project>{99BE9DB1-3885-4B20-B048-175878CF3D4E}</Project>
+      <Name>Andersc.CodeLib.Common</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Data\ReadMe.html" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

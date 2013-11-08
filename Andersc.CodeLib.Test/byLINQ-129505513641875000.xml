@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<books>
+  <book title="WinForms in Action">
+    <publisher>Manning</publisher>
+  </book>
+  <book title="RSS and Atom in Action">
+    <publisher>Manning</publisher>
+  </book>
+</books>

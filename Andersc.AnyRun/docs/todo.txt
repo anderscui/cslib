@@ -1,0 +1,31 @@
+﻿KeyPress events:
+
+a. global: 
+    Esc: hide window;
+    Enter: run current cmd;
+b. private:
+    sugs: arrows;
+c. others:
+    redirect to textbox;
+
+1. refine SqliteHelper class for real world use.
+
+----
+05/29/2013
+
+Try to use parser and parserResult to abstract functions:
+
+built-in parsers:
+    Mock: for test only;
+    Cmd: core, run executables;
+    Web: core, open urls;
+    SpecialFolder: open special folder of current user (on windows);
+    Calc: calculate simple arithmetic expressions;
+    Shell: run a command, capture the output, inspired by sn -T tool;
+           sometimes it's useful, but where to show it?
+           create a details info/form?
+    
+extensible plugins:
+    douban: book/movie;
+    weather:
+    

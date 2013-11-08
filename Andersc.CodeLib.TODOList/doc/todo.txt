@@ -1,0 +1,25 @@
+﻿1. a global, beautiful dialog or form;
+2. a notify icon;
+
+these two are the basic features.
+
+for: 
+clear what you are doing;
+select the item you really want/need to do;
+track the item history;
+analyze the history for efficiency improvement;
+3. manage todo items like a calendar, so everyday you are clear what you are doing;
+	3.1 for an item, it has subject, memo, start_date, due_date, status(Not started, In progress, Completed), priority(Low, Normal, High), progress(0-100), reminder(0 or 1), category by color, created_date, completed_date.
+	3.2 consider using SQLite. (Y on 11-26)
+	3.3 for items that you just have some interests in, store them in table thought. You can create a new todo from a thought, or vice versa.
+	3.4 for all the transaction data operations(created, status, priority, progress change), make logs. By logs, this tool can show a history chart to help you analyze you plan ability. Also note that for better using logs, created_date, completed_date and user are necessary.
+	3.5 support two level categories.
+	3.6 support user security, by now, just use a mock one.
+	3.7 rich shortcuts, this tool should be very convenient to use, sys hot key and app level shortcut are "must have".
+	3.8 less resource needed, this tool should be lightweight, and UNIX style.
+	3.9 consider command-line support.
+	3.10 consider port to linux after learning Qt or other similiar tools.
+	3.11 support multi-view, user can select "by progress", "by priority+progress" or other options.
+	3.12 use table [option] to store info of app level settings.
+	3.13 single instance of app.
+	3.14 notify icon.

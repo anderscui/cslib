@@ -1,0 +1,14 @@
+2007-07-17
+1.DataMapper - > dao.
+2.my vs2005 add-in, e.g. insert Datetime.Now;insert author name.
+3.using Prototype.js library.
+
+
+Need to Update List: 
+boxover.js
+MailSender
+
+2007-11-10
+AccessHelper
+MySqlHelper
+

@@ -1,0 +1,59 @@
+2007-12-03
+Add the basic role authentication codes.
+
+2009-01-10
+Resource Lib：
+添加3张基本表：Resource, ResourceCategory, Tag
+一张关联表：ResourceTag
+
+2009-01-11
+Resource Lib：
+添加了关于Resource和Tag的基本sqlMapper文件；
+添加了Domain类；
+顺便在Tester中加了两个TestCase，熟悉了下iBATIS的配置；
+
+2009-01-12
+实现了Dao的基本数据操作；
+
+发现iBATIS的一个bug，如果两个类型为
+Domain.Todo.Todo和Domain.Todo.TodoList就会报错；
+Domain.Resource.Resource和Domain.Resource.ResourceCategory也会报错；
+Domain.ResourceLib.Resource和Domain.ResourceLib.ResourceCategory也会报错；
+改成Domain.Resource和Domain.Resource.ResourceCategory就可以了；
+看来是这样的两个类型不能放在同一NS下。。。
+
+在Service类里要用static方法，如果使用ObjectDataSource就要用static？
+iBATIS.NET的分页相关做法：
+in Dao class:
+public IList<FavoriteJob> SelectPaginatedListByUserId(int userId, int skipResults, int maxResults)
+{
+    return ExecuteQueryForList<FavoriteJob>("FavoriteJob_SelectByUserId", userId, skipResults, maxResults);
+}
+public int SelectCountByUserId(int userId)
+{
+    return ExecuteQueryForObject<int>("FavoriteJob_SelectCountByUserId", userId);
+}
+in Service class:
+public static IList<FavoriteJob> GetFavoriteJobsByUserId(int userId, int skipResults, int maxResults)
+{
+    return fjDao.SelectPaginatedListByUserId(userId, skipResults, maxResults);
+}
+
+public static int GetFavoriteJobsCountByUserId(int userId)
+{
+    return fjDao.SelectCountByUserId(userId);
+}
+
+在Dao中方法名像这样：Insert, Update, Delete, Select；
+在Service则如是：Add, Update, Remove, Get.
+
+---------------------------------
+
+添加TagService; TagList.aspx;
+在Web Project添加AJAX支持，以及对ajaxToolKit的引用；
+生成ResourceLib相关表的脚本；
+
+
+
+2009-08-29
+Finish Smart Copier & Vss Helper.

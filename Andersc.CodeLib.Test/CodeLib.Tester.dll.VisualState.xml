@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<VisualState xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ShowCheckBoxes="false">
+  <TopNode>[0-1035]F:\myWorks\VS2008\CodeLib\CodeLib.Test\CodeLib.Tester.dll</TopNode>
+  <SelectedNode>[0-1035]F:\myWorks\VS2008\CodeLib\CodeLib.Test\CodeLib.Tester.dll</SelectedNode>
+  <ExcludeCategories>false</ExcludeCategories>
+  <Nodes>
+    <Node UniqueName="[0-1035]F:\myWorks\VS2008\CodeLib\CodeLib.Test\CodeLib.Tester.dll" Expanded="true">
+      <Nodes>
+        <Node UniqueName="[0-1036]CodeLib" Expanded="true">
+          <Nodes>
+            <Node UniqueName="[0-1037]CodeLib.Tester" Expanded="true">
+              <Nodes>
+                <Node UniqueName="[0-1038]CodeLib.Tester.Common" Expanded="true">
+                  <Nodes>
+                    <Node UniqueName="[0-1015]CodeLib.Tester.Common.DateTimeHelperTest">
+                      <Nodes>
+                        <Node UniqueName="[0-1019]CodeLib.Tester.Common.DateTimeHelperTest.AddDateTime" />
+                        <Node UniqueName="[0-1018]CodeLib.Tester.Common.DateTimeHelperTest.GetDateTimeUnit" />
+                        <Node UniqueName="[0-1016]CodeLib.Tester.Common.DateTimeHelperTest.GetDateTimeUnitException" />
+                        <Node UniqueName="[0-1017]CodeLib.Tester.Common.DateTimeHelperTest.GetDateTimeUnitInvalidUnit" />
+                      </Nodes>
+                    </Node>
+                    <Node UniqueName="[0-1030]CodeLib.Tester.Common.EnvironmentHelperTest">
+                      <Nodes>
+                        <Node UniqueName="[0-1031]CodeLib.Tester.Common.EnvironmentHelperTest.TestGetEnvironmentVariables" />
+                        <Node UniqueName="[0-1032]CodeLib.Tester.Common.EnvironmentHelperTest.TestHasEnvironmentVar" />
+                      </Nodes>
+                    </Node>
+                    <Node UniqueName="[0-1025]CodeLib.Tester.Common.IntArraySorterTest">
+                      <Nodes>
+                        <Node UniqueName="[0-1026]CodeLib.Tester.Common.IntArraySorterTest.TestBubbleSort" />
+                        <Node UniqueName="[0-1028]CodeLib.Tester.Common.IntArraySorterTest.TestInsertionSort" />
+                        <Node UniqueName="[0-1027]CodeLib.Tester.Common.IntArraySorterTest.TestSelectionSort" />
+                        <Node UniqueName="[0-1029]CodeLib.Tester.Common.IntArraySorterTest.TestShellSort" />
+                      </Nodes>
+                    </Node>
+                    <Node UniqueName="[0-1000]CodeLib.Tester.Common.TestGenerics">
+                      <Nodes>
+                        <Node UniqueName="[0-1003]CodeLib.Tester.Common.TestGenerics.TestAction" />
+                        <Node UniqueName="[0-1002]CodeLib.Tester.Common.TestGenerics.TestFunc" />
+                        <Node UniqueName="[0-1001]CodeLib.Tester.Common.TestGenerics.TestPredicate" />
+                      </Nodes>
+                    </Node>
+                  </Nodes>
+                </Node>
+                <Node UniqueName="[0-1039]CodeLib.Tester.DaoLayer" Expanded="true">
+                  <Nodes>
+                    <Node UniqueName="[0-1012]CodeLib.Tester.DaoLayer.ResourceDaoTest">
+                      <Nodes>
+                        <Node UniqueName="[0-1014]CodeLib.Tester.DaoLayer.ResourceDaoTest.TestSelect" />
+                        <Node UniqueName="[0-1013]CodeLib.Tester.DaoLayer.ResourceDaoTest.TestSelectCategory" />
+                      </Nodes>
+                    </Node>
+                    <Node UniqueName="[0-1004]CodeLib.Tester.DaoLayer.TagDaoTest">
+                      <Nodes>
+                        <Node UniqueName="[0-1011]CodeLib.Tester.DaoLayer.TagDaoTest.TestDelete" />
+                        <Node UniqueName="[0-1009]CodeLib.Tester.DaoLayer.TagDaoTest.TestInsert" />
+                        <Node UniqueName="[0-1005]CodeLib.Tester.DaoLayer.TagDaoTest.TestSelect" />
+                        <Node UniqueName="[0-1007]CodeLib.Tester.DaoLayer.TagDaoTest.TestSelectAll" />
+                        <Node UniqueName="[0-1006]CodeLib.Tester.DaoLayer.TagDaoTest.TestSelectCount" />
+                        <Node UniqueName="[0-1008]CodeLib.Tester.DaoLayer.TagDaoTest.TestSelectPaginatedList" />
+                        <Node UniqueName="[0-1010]CodeLib.Tester.DaoLayer.TagDaoTest.TestUpdate" />
+                      </Nodes>
+                    </Node>
+                    <Node UniqueName="[0-1020]CodeLib.Tester.DaoLayer.TodoDaoTest">
+                      <Nodes>
+                        <Node UniqueName="[0-1024]CodeLib.Tester.DaoLayer.TodoDaoTest.SelectAllTodoCategories" />
+                        <Node UniqueName="[0-1021]CodeLib.Tester.DaoLayer.TodoDaoTest.SelectTodoById" />
+                        <Node UniqueName="[0-1023]CodeLib.Tester.DaoLayer.TodoDaoTest.SelectTodoCategoryById" />
+                        <Node UniqueName="[0-1022]CodeLib.Tester.DaoLayer.TodoDaoTest.SelectTodoListByUserId" />
+                      </Nodes>
+                    </Node>
+                  </Nodes>
+                </Node>
+                <Node UniqueName="[0-1033]CodeLib.Tester.TestNumbers">
+                  <Nodes>
+                    <Node UniqueName="[0-1034]CodeLib.Tester.TestNumbers.TestFloatingPointNumber" />
+                  </Nodes>
+                </Node>
+              </Nodes>
+            </Node>
+          </Nodes>
+        </Node>
+      </Nodes>
+    </Node>
+  </Nodes>
+</VisualState>

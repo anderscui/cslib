@@ -1,0 +1,126 @@
+iBATIS
+
+in action: 
+ch04, Inheritance mapping.  OK；
+
+
+Web UI. OK
+1.User, Role tables.
+User: UserId, UserName(for login), NickName(for display), ActualName, Password, Enabled, Description
+Role: RoleId, RoleName, Description
+UserInRole: UserId, RoleId
+Permission: PermissionId, PermissionName, Url(relative path), Description
+PermissionOfRole: RoleId, PermissionId
+
+2007-12-23  OK
+Finish navigation tree, consider user-role-group temperarily(add deny list later).(MOVE DATA TO Config(XML or DataTable) )
+Consistent navigation(redirect, querysting...), exception handling, logging, javascript, css, images, master page, usercontrol, page class
+
+2007-12-30  OK
+Consistent Login area.
+Locate nav tree for current page.
+优化导航表格代码;
+Relative Path: ~/default.aspx or /default.aspx or /site/default.aspx.
+
+2008-01-01 Ok
+Master page: Front end, back end(admin).
+Front: Users, consume the service;
+Back : Admins, manage the contents;
+
+2008-01-02  OK
+Using <location> section to authorize the admin pages, modify it to httpModule.
+<location>控制较大的、通用的资源，而httpModule则控制局部的、特殊的资源。
+authorization，慢慢考虑，先只分前后台加上HttpModule，以后再统一考虑，毕竟它是一项aspect。
+Permission Group Order
+
+----------------------------------------
+New start(added on 2009-01-10)-------------------------------------------------
+----------------------------------------
+
+2008-01-05
+给User表添加更多的信息，如合适注册等；
+Permission要扩展，以表示是否可匿名访问，是否用于导航。
+PageMode：Add, Edit, View. Enum
+
+Attachment table.
+
+CodeSmith template: Domain to Table; Dao Class.
+
+2008-12-21
+My God! 一年快过去了！Reborn!
+先把NComparer完成吧；然后是比较实用的TodoList module；
+尝试AJAX Controls.
+Greybox & Boxover.
+
+2009-01-07  OK(01-12)
+Resource Lib: 基本文件信息，Tag，Rating（1-5），Full-text Search
+
+2009-01-10
+Resource Lib: 
+生成基本的Dao、Service代码；
+添加基本操作、管理（分类、Tag、Resource），相关权限设定；
+
+下一步是扩展操作：Play in page; Relations between resources; Full-text Search
+Integrate with TODOList; Export to(e.g xml file) / Import from；
+(Tag AutoComplete)
+	
+找时间在CodeLib中添加新项目，专门管理各种CodeSnippets；
+C#/F#/JS/CSS/SQL/Regex...
+
+querystring helper. encrypt.
+How to control the security of web controls?
+User.Password Decrypt.
+
+2009-01-11
+找一个更为简单的Web Editor，问小丽；
+
+Resource Lib: 
+代码中添加log4net日志；
+采用Moq来测试代码；
+Dao和Service类的CodeSmith模板；
+Category 暂定为3级的，如eBook -> Developer -> .NET，搜索时可借助于Tag。
+iBATIS使用时，在Dao类中用了static constructor，不知会不会有问题。
+添加统一的异常处理机制；
+实现Service，并提供分页方法；
+
+考虑换一种DA工具，ActiveRecord？
+
+2009-01-12
+iBATIS sort by(refer to ES)
+善用缓存；
+给重要数据表添加日期字段，或者建立统一的日志表做备份；
+TagList分页后就没有导航树了。。。
+
+2009-01-13
+给部分表格添加Enable字段，soft delete。
+寻找开源程序，优化Layout、UI、Appearance。
+
+2009-08-29
+Custom config sections in winform app.
+Resource file.
+
+2011-04-21
+Add more implicit operators for convenience;
+
+Comprehensive/thorough unit testing coverage;
+
+Collections: IEnumerable, 
+
+
+2011-04-24
+Collections: Synchonization;
+Serializable, see impl in FCL;
+Exception Serialization;
+
+
+2011-04-25
+Replace colletions in codes with my own impls.
+
+
+2011-04-26
+Reorganize common lib: out-of-dated/useless;
+Int32 extension: GreaterThan, LessThan...
+
+
+2011-05-31
+Add necessary comments to codes, esp. in common lib.

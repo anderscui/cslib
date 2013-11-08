@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <xs:element name="root">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="Form" type="formType" maxOccurs="unbounded" />
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:complexType name="formType">
+        <xs:sequence>
+            <xs:element name="Control" type="ctrlType" maxOccurs="unbounded" />
+        </xs:sequence>
+        <xs:attribute name="name" use="required" />
+        <xs:attribute name="help" use="required" />
+    </xs:complexType>
+    <xs:complexType name="ctrlType">
+        <xs:sequence>
+            <xs:element name="Validator" type="valType" minOccurs="0" maxOccurs="50" />
+        </xs:sequence>
+        <xs:attribute name="name" use="required" />
+        <xs:attribute name="length" use="optional" type="xs:integer" />
+        <xs:attribute name="help" use="required" />
+    </xs:complexType>
+    <xs:complexType name="valType">
+        <xs:sequence>
+            <xs:element name="Error" type="xs:string" minOccurs="1" maxOccurs="1" />
+            <xs:element name="ValidateParamA" type="xs:string" minOccurs="1" maxOccurs="1" />
+            <xs:element name="ValidateParamB" type="xs:string" minOccurs="1" maxOccurs="1" />
+        </xs:sequence>
+        <xs:attribute name="type" use="required">
+            <xs:simpleType>
+                <xs:restriction base="xs:NMTOKEN">
+                    <xs:enumeration value="RequiredFieldValidator" />
+                    <xs:enumeration value="RangeValidator" />
+                    <xs:enumeration value="RegularExpressionValidator" />
+                    <xs:enumeration value="CompareValidator" />
+                </xs:restriction>
+            </xs:simpleType>
+        </xs:attribute>
+    </xs:complexType>
+</xs:schema>

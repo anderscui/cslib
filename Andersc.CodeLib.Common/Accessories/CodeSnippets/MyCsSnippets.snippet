@@ -1,0 +1,94 @@
+<CodeSnippets xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+    <CodeSnippet Format="1.0.0">
+        <Header>
+            <Title>Andersc - Create an entry point Main() method</Title>
+            <Shortcut>smm</Shortcut>
+            <Author>Anders Cui</Author>
+            <Description>Code Snippet for creating an entry point Main() method.</Description>
+        </Header>
+        <Snippet>
+            <Code Language="CSharp">
+                <![CDATA[static void Main(string[] args)
+        {
+            $end$
+        }]]>
+            </Code>
+        </Snippet>
+    </CodeSnippet>
+    <CodeSnippet Format="1.0.0">
+        <Header>
+            <Title>Andersc - Console.ReadLine</Title>
+            <Shortcut>cr</Shortcut>
+            <Author>Anders Cui</Author>
+            <Description>Code Snippet for calling Console.ReadLine method.</Description>
+        </Header>
+        <Snippet>
+            <Code Language="CSharp">
+                <![CDATA[Console.ReadLine();
+                $end$]]>
+            </Code>
+        </Snippet>
+    </CodeSnippet>
+    <CodeSnippet Format="1.0.0">
+        <Header>
+            <Title>Andersc - Create an entry point Main() method</Title>
+            <Shortcut>smm</Shortcut>
+            <Author>Anders Cui</Author>
+            <Description>Code Snippet for creating an entry point Main() method.</Description>
+        </Header>
+        <Snippet>
+            <Code Language="CSharp">
+                <![CDATA[static void Main(string[] args)
+        {
+            $end$
+        }]]>
+            </Code>
+        </Snippet>
+    </CodeSnippet>
+    <CodeSnippet Format="1.0.0">
+        <Header>
+            <Title>Andersc - Debug.WriteLine</Title>
+            <Shortcut>dw</Shortcut>
+            <Author>Anders Cui</Author>
+            <Description>Code Snippet for calling Debug.WriteLine method.</Description>
+        </Header>
+        <Snippet>
+            <Code Language="CSharp">
+                <![CDATA[$NameOfDebug$.WriteLine($text$);
+                $end$]]>
+            </Code>
+            <Declarations>
+                <Literal>
+                    <ID>text</ID>
+                    <ToolTip>Text to write</ToolTip>
+                    <Default>"Text"</Default>
+                </Literal>
+                <Literal Editable="false">
+                    <ID>NameOfDebug</ID>
+                    <Function>SimpleTypeName(global::System.Diagnostics.Debug)</Function>
+                </Literal>
+            </Declarations>
+        </Snippet>
+    </CodeSnippet>
+    <CodeSnippet Format="1.0.0">
+        <Header>
+            <Title>Andersc - Response.Write</Title>
+            <Shortcut>rw</Shortcut>
+            <Author>Anders Cui</Author>
+            <Description>Code Snippet for calling Response.Write method.</Description>
+        </Header>
+        <Snippet>
+            <Code Language="CSharp">
+                <![CDATA[Response.Write($text$);
+                $end$]]>
+            </Code>
+            <Declarations>
+                <Literal>
+                    <ID>text</ID>
+                    <ToolTip>Text to write</ToolTip>
+                    <Default>Text</Default>
+                </Literal>
+            </Declarations>
+        </Snippet>
+    </CodeSnippet>
+</CodeSnippets>

@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<categories>
+    <category id="1" name="Read" displayOrder="1">
+        <desc></desc>
+    </category>
+    <category id="2" name="Write" displayOrder="2">
+        <desc></desc>
+    </category>
+    <category id="3" name="Watch" displayOrder="3">
+        <desc></desc>
+    </category>
+    <category id="4" name="Activities" displayOrder="4">
+        <desc></desc>
+    </category>
+    <category id="5" name="DailyLife" displayOrder="5">
+        <desc></desc>
+    </category>
+    <category id="6" name="Job" displayOrder="6">
+        <desc></desc>
+    </category>
+    <category id="7" name="Family" displayOrder="7">
+        <desc></desc>
+    </category>
+    <category id="8" name="Misc" displayOrder="8">
+        <desc></desc>
+    </category>
+</categories>

@@ -1,0 +1,39 @@
+Requirements:
+
+0. Global 
+	0.1 sign in
+	for public pages, user doesn't need to sign in; for others user has to sign in first;
+
+	0.2 multi-lan
+	currently, app should support zh-CN(default) and en-US;
+
+	0.3 tags
+	most items in app, such as thinking, todo, book, movie or music, could have related tags, these tags are shared;
+
+	0.4 tracking
+	most(if not all) of the items/actions in app should be tracked;
+
+1. User signs in
+	pre: no user signs in; 
+	post: the user (input name/account) logs in; and user will be redirected to the FROM page;
+	lifeasier is mainly used to manage one's personal data, so the user should have to sign in first for MOST cases.
+	user need to provide user name, pwd, captcha and optional remember me;
+
+2. User signed out 
+	pre: one user has signed in;
+	post: pre of case $1; and user will be redirected to the HOME page;
+
+3. Managing todo list
+	3.1 Add a todo item
+	pre: 
+	post: a new item added;
+
+
+
+
+-- design
+1. Transcation management
+	in logic or dao?
+
+2. Logging
+	log4net;

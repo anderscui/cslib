@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Andersc.CodeLib.Algorithm.WordSearchPuzzle">
+    <Position X="1.5" Y="1.25" Width="1.75" />
+    <Members>
+      <Field Name="board" Hidden="true" />
+      <Field Name="columns" Hidden="true" />
+      <Method Name="OpenFile" Hidden="true" />
+      <Field Name="rows" Hidden="true" />
+      <Field Name="words" Hidden="true" />
+    </Members>
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAAAAAEAAEAAAAAAAABAAAAIAAEAAEAAKCAAAAAAAAA=</HashCode>
+      <FileName>WordSearchPuzzle.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="SimSun" Size="9" />
+</ClassDiagram>

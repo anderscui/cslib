@@ -1,0 +1,259 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{070F487D-C504-4FCC-AC7B-BF2D67D9D4DD}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Andersc.CodeLib.WinFormsSamples</RootNamespace>
+    <AssemblyName>Andersc.CodeLib.WinFormsSamples</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>
+    </SccProjectName>
+    <SccLocalPath>
+    </SccLocalPath>
+    <SccAuxPath>
+    </SccAuxPath>
+    <SccProvider>
+    </SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Components\ConfigManager.cs" />
+    <Compile Include="Components\KeyState.cs" />
+    <Compile Include="Components\Mbox.cs" />
+    <Compile Include="Components\ValueChangedEventArgs.cs" />
+    <Compile Include="Components\VssInfoSection.cs" />
+    <Compile Include="CustomControlsForms\EllipseLabelForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CustomControlsForms\EllipseLabelForm.Designer.cs">
+      <DependentUpon>EllipseLabelForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CustomControlsForms\FileTextBoxForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CustomControlsForms\FileTextBoxForm.Designer.cs">
+      <DependentUpon>FileTextBoxForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CustomControls\EllipseLabel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="CustomControls\EllipseLabel.Designer.cs">
+      <DependentUpon>EllipseLabel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CustomControls\FileBrowseTextBox.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="CustomControls\FileBrowseTextBox.Designer.cs">
+      <DependentUpon>FileBrowseTextBox.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CustomControls\FileTextBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="DialogForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GraphicSample\BasicSample.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GraphicSample\BasicSample.Designer.cs">
+      <DependentUpon>BasicSample.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MainForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MainForm.Designer.cs">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Misc\AllCultures.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Misc\AllCultures.Designer.cs">
+      <DependentUpon>AllCultures.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Multithread\AsyncOperForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Multithread\AsyncOperForm.Designer.cs">
+      <DependentUpon>AsyncOperForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Multithread\AsyncOperFormBasic.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Multithread\AsyncOperFormBasic.Designer.cs">
+      <DependentUpon>AsyncOperFormBasic.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Multithread\CancelAsyncOperForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Multithread\CancelAsyncOperForm.Designer.cs">
+      <DependentUpon>CancelAsyncOperForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Multithread\CoolBackgroundWorker.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Multithread\CoolBackgroundWorker.Designer.cs">
+      <DependentUpon>CoolBackgroundWorker.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Multithread\SimpleAsyncOperForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Multithread\SimpleAsyncOperForm.Designer.cs">
+      <DependentUpon>SimpleAsyncOperForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Multithread\SyncOperForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Multithread\SyncOperForm.Designer.cs">
+      <DependentUpon>SyncOperForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="StandardControls\DragDropForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="StandardControls\DragDropForm.Designer.cs">
+      <DependentUpon>DragDropForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="StandardControls\OwnerDrawCtrlForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="StandardControls\OwnerDrawCtrlForm.Designer.cs">
+      <DependentUpon>OwnerDrawCtrlForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TypedRes\Common.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Common.resx</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="CustomControlsForms\EllipseLabelForm.resx">
+      <DependentUpon>EllipseLabelForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CustomControlsForms\FileTextBoxForm.resx">
+      <DependentUpon>FileTextBoxForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CustomControls\FileBrowseTextBox.resx">
+      <DependentUpon>FileBrowseTextBox.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GraphicSample\BasicSample.resx">
+      <DependentUpon>BasicSample.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MainForm.en-US.resx">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MainForm.resx">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MainForm.zh-CN.resx">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Misc\AllCultures.resx">
+      <DependentUpon>AllCultures.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Multithread\AsyncOperForm.resx">
+      <DependentUpon>AsyncOperForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Multithread\AsyncOperFormBasic.resx">
+      <DependentUpon>AsyncOperFormBasic.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Multithread\CancelAsyncOperForm.resx">
+      <DependentUpon>CancelAsyncOperForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Multithread\CoolBackgroundWorker.resx">
+      <DependentUpon>CoolBackgroundWorker.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Multithread\SimpleAsyncOperForm.resx">
+      <DependentUpon>SimpleAsyncOperForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Multithread\SyncOperForm.resx">
+      <DependentUpon>SyncOperForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <EmbeddedResource Include="StandardControls\DragDropForm.resx">
+      <DependentUpon>DragDropForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="StandardControls\OwnerDrawCtrlForm.resx">
+      <DependentUpon>OwnerDrawCtrlForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TypedRes\Common.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Common.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <None Include="app.config">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Andersc.CodeLib.Common\Andersc.CodeLib.Common.csproj">
+      <Project>{99BE9DB1-3885-4B20-B048-175878CF3D4E}</Project>
+      <Name>Andersc.CodeLib.Common</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="ManifestRes\Image\fans-of-inter.jpg" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

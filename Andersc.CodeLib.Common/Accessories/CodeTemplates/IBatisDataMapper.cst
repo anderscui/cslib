@@ -1,0 +1,465 @@
+<%------------------------------------------------------------------------------------------
+* Author: Anders 
+* Description: 本模板将根据您指定的数据表生成基本的IBatisNet可用的SQL语句和ResultMap。 
+------------------------------------------------------------------------------------------%>
+<%@ CodeTemplate Debug="True" Language="C#" Inherits="CodeSmith.BaseTemplates.SqlCodeTemplate" TargetLanguage="T-SQL"
+	Description="Generates standard CRUD procedures based on a database table schema." %>
+<%-- Context --%>
+<%@ Property Name="SourceTable" Type="SchemaExplorer.TableSchema" Category="1. Context"
+	Description="选择一个表，CodeSmith将基于该表生成SQL语句" %>
+<%-- Options --%>
+<%@ Property Name="OrderByExpression" Type="System.String" Default="" Optional="True" Category="2. Options"
+	Description="该表达式用于为Select语句添加排序功能，是可选的" %>
+<%@ Property Name="ExcludedColumns" Type="StringCollection" Default="" Optional="True" Category="2. Options"
+	Description="该表达式指定一个列的列表，用以指示哪些列不会出现在语句中，但主键出外(*被视作通配符)" %>
+<%@ Property Name="ReadOnlyColumns" Type="StringCollection" Default="" Optional="True" Category="2. Options"
+	Description="指定只读的列列表(*被视作通配符)" %>
+	
+<%-- Statement Types --%>
+<%@ Property Name="IncludeResultMap" Type="System.Boolean" Default="True" Category="3. Statement Types"
+	Description="如果为真，将产生源表对应的ResultMap节点" %>
+<%@ Property Name="IncludeInsert" Type="System.Boolean" Default="True" Category="3. Statement Types"
+	Description="是否生成Insert语句" %>
+<%@ Property Name="IncludeUpdate" Type="System.Boolean" Default="True" Category="3. Statement Types"
+	Description="是否生成Update语句" %>
+<%@ Property Name="IncludeInsertUpdate" Type="System.Boolean" Default="True" Category="3. Statement Types"
+	Description="是否生成InsertUpdate语句" %>
+<%@ Property Name="IncludeDelete" Type="System.Boolean" Default="True" Category="3. Statement Types"
+	Description="是否生成Delete语句" %>
+<%@ Property Name="IncludeSelect" Type="System.Boolean" Default="True" Category="3. Statement Types"
+	Description="是否生成Select语句" %>
+<%@ Property Name="IncludeSelectAll" Type="System.Boolean" Default="True" Category="3. Statement Types"
+	Description="是否生成SelectAll语句" %>
+<%@ Property Name="ParameterClass" Type="System.String" Default="" Category="3. Statement Types"
+	Description="Select和Delete语句的参数类型" %>
+<%@ Property Name="TypeAlias" Type="System.String" Default="" Optional="True" Category="3. Statement Types"
+	Description="对应实体类的类型描述，格式为：TypeName, AssemblyName" %>
+	
+<%-- Assembly References --%>
+<%@ Assembly Name="SchemaExplorer" %>
+<%@ Assembly Name="CodeSmith.BaseTemplates" %>
+<%@ Assembly Name="CodeSmith.CustomProperties" %>
+<%@ Assembly Name="System.Data" %>
+
+<%-- Namespace Imports --%>
+<%@ Import Namespace="SchemaExplorer" %>
+<%@ Import Namespace="CodeSmith.CustomProperties" %>
+<%@ Import Namespace="CodeSmith.BaseTemplates" %>
+<%@ Import Namespace="System.Data" %>
+<%@ Import Namespace="System.Text.RegularExpressions" %>
+<%
+
+// 该模板要求源数据表有主键
+if (!SourceTable.HasPrimaryKey) throw new ApplicationException("SourceTable does not contain a primary key.");
+
+%>
+<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Test" xmlns="http://ibatis.apache.org/mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+	<alias>
+        <typeAlias alias="<%= SourceTable.Name %>" type="<%= TypeAlias %>" />
+    </alias>
+	
+	<resultMaps>
+		<resultMap class="<%= SourceTable.Name %>" id="<%= SourceTable.Name %>_Result"><% GenerateResultColumns(SourceTable.Columns); %>
+		</resultMap>
+	</resultMaps>
+	<statements>
+<%
+if (IncludeInsert)
+{
+%>
+		<insert id="<%= SourceTable.Name %>_Insert" parameterClass="<%= SourceTable.Name %>">
+			INSERT INTO <%= GetTableOwner() %>[<%= SourceTable.Name %>] (<% GenerateInsertColumns(SourceTable.Columns); %>) 
+				VALUES (<% GenerateVariables(SourceTable.Columns); %>)
+		</insert>
+<%
+}
+%>
+<%
+if (IncludeUpdate)
+{
+%>
+		<update id="<%= SourceTable.Name %>_Update" parameterClass="<%= SourceTable.Name %>">
+			UPDATE <%= GetTableOwner() %>[<%= SourceTable.Name %>] SET <% GenerateUpdates(SourceTable.NonPrimaryKeyColumns); %>
+				WHERE <% GenerateConditions(SourceTable.PrimaryKey.MemberColumns); %>
+		</update>
+<%
+}
+%>
+<%
+if (IncludeInsertUpdate)
+{
+%>
+		<insert id="<%= SourceTable.Name %>_InsertUpdate" parameterClass="<%= SourceTable.Name %>">
+			IF EXISTS(SELECT <% GenerateColumns(SourceTable.PrimaryKey.MemberColumns); %> FROM <%= GetTableOwner() %>[<%= SourceTable.Name %>] WHERE <% GenerateConditions(SourceTable.PrimaryKey.MemberColumns); %>)
+			BEGIN
+				UPDATE <%= GetTableOwner() %>[<%= SourceTable.Name %>] SET <% GenerateUpdates(SourceTable.NonPrimaryKeyColumns); %>
+					WHERE <% GenerateConditions(SourceTable.PrimaryKey.MemberColumns); %>
+			END
+			ELSE
+			BEGIN
+				INSERT INTO <%= GetTableOwner() %>[<%= SourceTable.Name %>] (<% GenerateInsertColumns(SourceTable.Columns); %>) 
+					VALUES (<% GenerateVariables(SourceTable.Columns); %>)
+			END
+		</insert>
+<%
+}
+%>
+<%
+if (IncludeDelete)
+{
+%>
+		<delete id="<%= SourceTable.Name %>_Delete" parameterClass="<%= ParameterClass %>">
+			DELETE FROM <%= GetTableOwner() %>[<%= SourceTable.Name %>] WHERE <% GenerateConditions(SourceTable.PrimaryKey.MemberColumns); %>
+		</delete>
+<%
+}
+%>
+<%
+if (IncludeSelect)
+{
+%>
+		<select id="<%= SourceTable.Name %>_Select" parameterClass="<%= ParameterClass %>" resultMap="<%= SourceTable.Name %>_Result" >
+			SELECT <% GenerateColumns(SourceTable.Columns); %> FROM <%= GetTableOwner() %>[<%= SourceTable.Name %>]
+				WHERE <% GenerateConditions(SourceTable.PrimaryKey.MemberColumns); %>
+		</select>
+<%
+}
+%>
+<%------------------------------------------------------------------------------------------
+*
+* Select All Procedure
+*
+------------------------------------------------------------------------------------------%>
+<%
+if (IncludeSelectAll)
+{
+%>
+		<select id="<%= SourceTable.Name %>_SelectAll" resultMap="<%= SourceTable.Name %>_Result" >
+			SELECT <% GenerateColumns(SourceTable.Columns); %>
+				FROM <%= GetTableOwner() %>[<%= SourceTable.Name %>]
+		</select>
+<% GenerateOrderByClause(); %>
+<%
+}
+%>
+	</statements>
+	
+</sqlMap>
+<script runat="template">
+
+#region Code Generation Helpers
+public string GetTableOwner()
+{
+	//return GetTableOwner(true);
+	return string.Empty;
+}
+
+public string GetTableOwner(bool includeDot)
+{
+	if (SourceTable.Owner.Length > 0)
+	{
+		if (includeDot)
+		{
+			return "[" + SourceTable.Owner + "].";
+		}
+		else
+		{
+			return "[" + SourceTable.Owner + "]";
+		}
+	}
+	else
+	{
+		return "";
+	}
+}
+
+public void GenerateIndent(int indentLevel)
+{
+    for (int i = 0; i < indentLevel; i++)
+	{
+		Response.Write('\t');
+	}
+}
+
+public void GenerateResultColumn(ColumnSchema column)
+{
+	Response.Write("<result column=\"");
+	Response.Write(column.Name);
+	Response.Write("\" property=\"");
+	Response.Write(column.Name);
+	Response.Write("\" />");
+}
+
+public void GenerateResultColumns(ColumnSchemaCollection columns)
+{
+	ColumnSchemaCollection filteredColumns = FilterExcludedColumns(columns);
+	Response.WriteLine();
+	for (int i = 0; i < filteredColumns.Count; i++)
+	{
+		this.GenerateIndent(3);
+		GenerateResultColumn(filteredColumns[i]);
+		if(i < filteredColumns.Count - 1)
+		{
+			Response.WriteLine();
+		}
+	}
+}
+
+public void GenerateColumn(ColumnSchema column, bool isFirst, bool isLast)
+{
+	Response.Write("[");
+	Response.Write(column.Name);
+	Response.Write("]");
+	if(!isLast)
+	{
+		Response.Write(", ");
+	}
+}
+
+public void GenerateColumns(ColumnSchemaCollection columns)
+{
+	ColumnSchemaCollection filteredColumns = FilterExcludedColumns(columns);
+	for (int i = 0; i < filteredColumns.Count; i++)
+	{
+		GenerateColumn(filteredColumns[i], i == 0, i == filteredColumns.Count - 1);
+	}
+}
+
+public void GenerateInsertColumns(ColumnSchemaCollection columns)
+{
+	ColumnSchemaCollection filteredColumns = FilterExcludedColumns(columns);
+	filteredColumns = FilterIdentityColumns(columns);
+	for (int i = 0; i < filteredColumns.Count; i++)
+	{
+		GenerateColumn(filteredColumns[i], i == 0, i == filteredColumns.Count - 1);
+	}
+}
+
+public void GenerateUpdate(ColumnSchema column, bool isFirst, bool isLast)
+{
+	Response.Write("[");
+	Response.Write(column.Name);
+	Response.Write("] = #");
+	Response.Write(column.Name);
+	Response.Write("#");
+	if(!isLast)
+	{
+		Response.Write(", ");
+	}
+}
+
+public void GenerateUpdates(ColumnSchemaCollection columns)
+{
+	ColumnSchemaCollection filteredColumns = FilterReadOnlyAndExcludedColumns(columns);
+	for (int i = 0; i < filteredColumns.Count; i++)
+	{
+		GenerateUpdate(filteredColumns[i], i == 0, i == filteredColumns.Count - 1);
+	}
+}
+
+public void GenerateCondition(ColumnSchema column, bool isFirst, bool isLast)
+{
+	if (!isFirst) Response.Write(" AND ");
+	Response.Write("[");
+	Response.Write(column.Name);
+	Response.Write("] = #");
+	Response.Write(column.Name);
+	Response.Write("#");
+}
+
+public void GenerateConditions(ColumnSchemaCollection columns)
+{
+	ColumnSchemaCollection filteredColumns = FilterExcludedColumns(columns);
+	for (int i = 0; i < filteredColumns.Count; i++)
+	{
+		GenerateCondition(filteredColumns[i], i == 0, i == filteredColumns.Count - 1);
+	}
+}
+
+public void GenerateVariable(ColumnSchema column, bool isFirst, bool isLast)
+{
+	Response.Write("#");
+	Response.Write(column.Name);
+	Response.Write("#");
+	if (!isLast)
+	{
+		Response.Write(", ");
+	}
+}
+
+public void GenerateVariables(ColumnSchemaCollection columns)
+{
+	ColumnSchemaCollection filteredColumns = FilterExcludedColumns(columns);
+	filteredColumns = FilterIdentityColumns(columns);
+	for (int i = 0; i < filteredColumns.Count; i++)
+	{
+		GenerateVariable(filteredColumns[i], i == 0, i == filteredColumns.Count - 1);
+	}
+}
+
+public void GenerateOrderByClause()
+{
+	if (OrderByExpression != null && OrderByExpression.Trim().Length > 0)
+	{
+		Response.WriteLine("ORDER BY");
+		Response.WriteLine(OrderByExpression);
+	}
+}
+
+public ColumnSchemaCollection FilterReadOnlyColumns(ColumnSchemaCollection columns)
+{
+	ColumnSchemaCollection filteredColumns = new ColumnSchemaCollection();
+	
+	for (int i = 0; i < columns.Count; i++)
+	{
+		if (!ColumnIsReadOnly(columns[i])) filteredColumns.Add(columns[i]);
+	}
+	
+	return filteredColumns;
+}
+
+public ColumnSchemaCollection FilterExcludedColumns(ColumnSchemaCollection columns)
+{
+	ColumnSchemaCollection filteredColumns = new ColumnSchemaCollection();
+	
+	for (int i = 0; i < columns.Count; i++)
+	{
+		if (!ColumnIsExcluded(columns[i])) filteredColumns.Add(columns[i]);
+	}
+	
+	return filteredColumns;
+}
+
+public ColumnSchemaCollection FilterIdentityColumns(ColumnSchemaCollection columns)
+{
+	ColumnSchemaCollection filteredColumns = new ColumnSchemaCollection();
+	
+	for (int i = 0; i < columns.Count; i++)
+	{
+		if(!((bool)columns[i].ExtendedProperties["CS_IsIdentity"].Value))
+		{
+			filteredColumns.Add(columns[i]);
+		}
+	}
+	
+	return filteredColumns;
+}
+
+public ColumnSchemaCollection FilterReadOnlyAndExcludedColumns(ColumnSchemaCollection columns)
+{
+	ColumnSchemaCollection filteredColumns = new ColumnSchemaCollection();
+	
+	for (int i = 0; i < columns.Count; i++)
+	{
+		if (!ColumnIsExcludedOrReadOnly(columns[i])) filteredColumns.Add(columns[i]);
+	}
+	
+	return filteredColumns;
+}
+
+private Regex excludedColumnRegex = null;
+
+public bool ColumnIsExcluded(ColumnSchema column)
+{
+	if (column.IsPrimaryKeyMember) return false;
+	
+	if (excludedColumnRegex == null)
+	{
+		if (ExcludedColumns != null && ExcludedColumns.Count > 0)
+		{
+			string excluded = String.Empty;
+			for (int i = 0; i < ExcludedColumns.Count; i++)
+			{
+				if (ExcludedColumns[i].Trim().Length > 0)
+				{
+					excluded += "(" + Regex.Escape(ExcludedColumns[i]).Replace("\\*", ".*?") + ")|";
+				}
+			}
+			
+			if (excluded.Length > 0)
+			{
+				excluded = excluded.Substring(0, excluded.Length - 1);
+				excludedColumnRegex = new Regex(excluded, RegexOptions.IgnoreCase);
+			}
+		}
+	}
+	
+	if (excludedColumnRegex != null && excludedColumnRegex.IsMatch(column.Name)) return true;
+	
+	return false;
+}
+
+private Regex readOnlyColumnRegex = null;
+
+public bool ColumnIsReadOnly(ColumnSchema column)
+{
+	if (column.IsPrimaryKeyMember) return false;
+	
+	if (readOnlyColumnRegex == null)
+	{
+		if (ReadOnlyColumns != null && ReadOnlyColumns.Count > 0)
+		{
+			string readOnly = String.Empty;
+			for (int i = 0; i < ReadOnlyColumns.Count; i++)
+			{
+				if (ReadOnlyColumns[i].Trim().Length > 0)
+				{
+					readOnly += "(" + Regex.Escape(ReadOnlyColumns[i]).Replace("\\*", ".*?") + ")|";
+				}
+			}
+			
+			if (readOnly.Length > 0)
+			{
+				readOnly = readOnly.Substring(0, readOnly.Length - 1);
+				readOnlyColumnRegex = new Regex(readOnly, RegexOptions.IgnoreCase);
+			}
+		}
+	}
+	
+	if (readOnlyColumnRegex != null && readOnlyColumnRegex.IsMatch(column.Name)) return true;
+	
+	return false;
+}
+
+public bool ColumnIsExcludedOrReadOnly(ColumnSchema column)
+{
+	return ColumnIsExcluded(column) || ColumnIsReadOnly(column);
+}
+#endregion
+
+#region Template Overrides
+// Assign an appropriate file name to the output.
+public override string GetFileName()
+{
+	if (this.SourceTable != null)
+	{
+		return this.SourceTable.Name + "_Procedures.sql";
+	}
+	else
+	{
+		return base.GetFileName();
+	}
+}
+
+// Override the OutputFile property and assign our specific settings to it.
+[Category("2. Options")]
+[FileDialog(FileDialogType.Save, Title="Select Output File", Filter="Query Files (*.sql)|*.sql|All Files (*.*)|*.*", DefaultExtension=".sql")]
+public override string OutputFile
+{
+	get {return base.OutputFile;}
+	set {base.OutputFile = value;}
+}
+
+protected override void OnPostRender(string result) 
+{
+	base.OnPostRender(result);
+}
+
+private void cn_InfoMessage(object sender, System.Data.SqlClient.SqlInfoMessageEventArgs e)
+{
+	Trace.WriteLine(e.Message);
+}
+#endregion
+</script>

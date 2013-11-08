@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<items>
+    <item id="1" categoryID="1" priority="3">
+        <title>Item1</title>
+        <desc></desc>
+        <link></link>
+        <tags>1,2</tags>
+        <score>6</score>
+        <comment></comment>
+        <startOn></startOn>
+        <endOn></endOn>
+    </item>
+    <item id="2" categoryID="2" priority="2">
+        <title>Item2</title>
+        <desc></desc>
+        <link></link>
+        <tags>3</tags>
+        <score>8</score>
+        <comment></comment>
+        <startOn></startOn>
+        <endOn></endOn>
+    </item>
+</items>
