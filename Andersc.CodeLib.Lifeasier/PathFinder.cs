@@ -9,6 +9,7 @@ using System.Windows.Forms;
 using Microsoft.Win32;
 
 using Andersc.CodeLib.Common;
+using Andersc.CodeLib.Lifeasier.Components;
 
 namespace Andersc.CodeLib.Lifeasier
 {
@@ -23,31 +24,41 @@ namespace Andersc.CodeLib.Lifeasier
 
         private void InitControls()
         {
-            StringBuilder sb = new StringBuilder();
-            using (RegistryKey key = Registry.LocalMachine.OpenSubKey(@"Software\Microsoft\Windows\CurrentVersion\Uninstall", false))
+            using (var key = Registry.LocalMachine.OpenSubKey(@"Software\Microsoft\Windows\CurrentVersion\Uninstall", false))
             {
                 if (key != null)
                 {
+                    var sb = new StringBuilder();
+                    var apps = new List<AppInfo>();
                     foreach (string keyName in key.GetSubKeyNames())
                     {
-                        using (RegistryKey key2 = key.OpenSubKey(keyName, false))
+                        using (var key2 = key.OpenSubKey(keyName, false))
                         {
                             if (key2 != null)
                             {
-                                string softwareName = key2.GetValue("DisplayName", "").ToString();
-                                string installLocation = key2.GetValue("UninstallString", "").ToString();
-                                if (!string.IsNullOrEmpty(installLocation))
+                                var name = key2.GetValue("DisplayName", "").ToString();
+                                var installPath = key2.GetValue("InstallLocation", "").ToString();
+                                var publisher = key2.GetValue("Publisher", "").ToString();
+                                var version = key2.GetValue("DisplayVersion", "").ToString();
+                                if (name.IsNotNullOrEmpty())
                                 {
-                                    sb.AppendLine(string.Format("软件名：{0} -- 安装路径：{1}\r\n", softwareName, installLocation));
+                                    apps.Add(new AppInfo()
+                                    {
+                                        Name = name, 
+                                        Version = version, 
+                                        Publisher = publisher,
+                                        InstallPath = installPath
+                                    });
                                 }
                             }
                         }
                     }
+                    apps.OrderBy(app => app.Name.ToLower()).ForEach(app => 
+                        sb.AppendLine(string.Format("{0} {1} - {2} \r\n    {3}\r\n",
+                                        app.Name, app.Version, app.Publisher, app.InstallPath)));
+                    txtApps.Text = sb.ToString();
                 }
             }
-
-            // 显示图标；
-            textBox1.Text = sb.ToString();
         }
     }
 }
