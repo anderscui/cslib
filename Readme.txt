@@ -1,6 +1,6 @@
 
 
-About Lifeasier:
+"Lifeasier"
 
 1. Smart Copier
 	1) Files can be multiselected;
@@ -16,3 +16,14 @@ References:
 2. Data Structures and Problem Solving Using Java (Mark Allen Weiss)
 3. The Design and Analysis of Algorithms (Levitin .A)
 4. Beauty of Code
+
+
+"Andersc.CodeLib.GenGen"
+This app is expected to become a general-purpose generator-GenGen.
+
+first step:
+    db
+        diff db driver;
+        diff db objects(table, trigger, data records and others)
+        support template;
+        custom gen rules;

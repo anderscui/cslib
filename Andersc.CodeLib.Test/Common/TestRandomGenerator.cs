@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 
 using NUnit.Framework;
 
 using Andersc.CodeLib.Common;
+using Andersc.CodeLib.Common.Collections;
 
 namespace Andersc.CodeLib.Tester.Common
 {
@@ -59,12 +61,12 @@ namespace Andersc.CodeLib.Tester.Common
         [Test]
         public void TestGetRandomChar()
         {
-            List<char> list = new List<char>();
+            var list = new List<char>();
             Enumerable.Range(0, 30).ToList().ForEach(i => list.Add(RandomGenerator.GetRandomChar()));
 
             Assert.That(list.Distinct().Count(), Is.GreaterThanOrEqualTo(list.Count / 2));
             Console.WriteLine(list.Distinct().Count());
-            list.ForEach(i => Console.WriteLine(i));
+            list.ForEach(Console.WriteLine);
         }
     }
 }

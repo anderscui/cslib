@@ -91,6 +91,7 @@
     <Compile Include="Algorithm\TestSorters.cs" />
     <Compile Include="Algorithm\TestStringMatcher.cs" />
     <Compile Include="Algorithm\TestWordSearchPuzzle.cs" />
+    <Compile Include="Common\TestRandomStringGenerator.cs" />
     <Compile Include="Common\TestBitOperators.cs" />
     <Compile Include="Common\TestDateTimeHelper.cs" />
     <Compile Include="Common\TestDynamicLinqQuery.cs" />
