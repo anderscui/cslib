@@ -58,6 +58,7 @@
     <Compile Include="Graphs\Vertex.cs" />
     <Compile Include="Helper.cs" />
     <Compile Include="Maths\MathSolver.cs" />
+    <Compile Include="Problems\RandomDispatcher.cs" />
     <Compile Include="Problems\RandomStringGenerator.cs" />
     <Compile Include="ProjectEuler\ProjectEulerQs.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

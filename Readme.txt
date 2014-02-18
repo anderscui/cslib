@@ -27,3 +27,37 @@ first step:
         diff db objects(table, trigger, data records and others)
         support template;
         custom gen rules;
+
+
+design:
+    data source
+        select objects
+
+result of GetSchema() method
+MetaDataCollections
+DataSourceInformation
+DataTypes
+Restrictions
+ReservedWords
+Users
+Databases
+Tables
+Columns
+AllColumns
+ColumnSetColumns
+StructuredTypeMembers
+Views
+ViewColumns
+ProcedureParameters
+Procedures
+ForeignKeys
+IndexColumns
+Indexes
+UserDefinedTypes
+
+Table structure:
+TABLE_CATALOG: Db Name
+TABLE_SCHEMA: dbo
+TABLE_NAME: SiteVersion
+TABLE_TYPE: BASE TABLE/VIEW
+

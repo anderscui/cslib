@@ -10,14 +10,10 @@ using log4net;
 namespace Andersc.CodeLib.Common.Data
 {
     /// <summary>
-    /// 提供对Sql Server数据库的各种操作
+    /// Provides access to SQL Server database.
     /// </summary>
-    /// 创 建 人: Anders
-    /// 创建日期: 2006-12-12
-    /// 修 改 人: 
-    /// 修改日期: 
-    /// 修改内容: 
-    /// 版    本: 1.0.0
+    /// Author: Anders
+    /// Created On: 2006-12-12
     /// <remarks>
     /// TODO: enhances support of stored procedure, transaction, logging, xml data
     /// </remarks>
@@ -28,10 +24,10 @@ namespace Andersc.CodeLib.Common.Data
 
         //private static readonly string RETURNVALUE = "RETURNVALUE";
         private static string errorMessageFormat = string.Empty +
-            "操作数据时发生错误." + Environment.NewLine +
-            "连接字符串: {0}" + Environment.NewLine +
-            "执行语句: {1}" + Environment.NewLine +
-            "错误信息: {2}" + Environment.NewLine;
+            "Database Error." + Environment.NewLine +
+            "ConnString: {0}" + Environment.NewLine +
+            "Command Text: {1}" + Environment.NewLine +
+            "Error Info: {2}" + Environment.NewLine;
 
         private static ILog logger = LogManager.GetLogger(typeof(DBHelper));
 
@@ -55,16 +51,6 @@ namespace Andersc.CodeLib.Common.Data
             return ExecuteReader(commandType, commandText, (SqlParameter[])null);
         }
 
-        /// <summary>
-        /// 使用using语句以关闭独占连接
-        /// </summary>
-        /// <param name="cmdType">命令类型</param>
-        /// <param name="cmdText">命令文本内容</param>
-        /// <param name="cmdParms">命令参数数组</param>
-        /// <example>
-        ///		dataGridView1.DataSource = DBHelper.Instance.ExecuteReader(CommandType.Text, "Select ID, Name From Employees", (SqlParameter[])null);
-        /// </example>
-        /// <returns></returns>
         public static SqlDataReader ExecuteReader(CommandType cmdType, string cmdText, params SqlParameter[] cmdParms)
         {
             SqlConnection conn = DBFactory.GetConnection();
@@ -317,24 +303,16 @@ namespace Andersc.CodeLib.Common.Data
         {
             using (SqlConnection conn = DBFactory.GetConnection())
             {
-                //创建一个SqlCommand对象，并对其进行初始化
                 SqlCommand cmd = DBFactory.GetSqlCommand();
 
                 try
                 {
                     PrepareCommand(conn, cmd, null, cmdType, cmdText, cmdParms);
 
-                    //创建SqlDataAdapter对象以及DataSet
                     SqlDataAdapter da = new SqlDataAdapter(cmd);
                     DataSet ds = new DataSet();
-
-                    //填充ds
                     da.Fill(ds);
-
-                    // 清除cmd的参数集合	
                     cmd.Parameters.Clear();
-
-                    //返回ds
                     return ds;
                 }
                 catch (Exception ex)
@@ -355,27 +333,21 @@ namespace Andersc.CodeLib.Common.Data
                     trans = conn.BeginTransaction();
                 }
 
-                //创建一个SqlCommand对象，并对其进行初始化
                 SqlCommand cmd = DBFactory.GetSqlCommand();
                 try
                 {
                     PrepareCommand(conn, cmd, trans, cmdType, cmdText, cmdParms);
 
-                    //创建SqlDataAdapter对象以及DataSet
                     SqlDataAdapter da = new SqlDataAdapter(cmd);
                     DataSet ds = new DataSet();
-                    //填充ds
                     da.Fill(ds);
-                    // 清除cmd的参数集合	
                     cmd.Parameters.Clear();
 
-                    // 提交事务
                     if (useTrans)
                     {
                         trans.Commit();
                     }
 
-                    //返回ds
                     return ds;
                 }
                 catch (Exception ex)
@@ -400,7 +372,7 @@ namespace Andersc.CodeLib.Common.Data
         #region TODO: ExecProc : Execute a Stored Procedure
 
         /// <summary>
-        /// ATODO:
+        /// TODO:
         /// </summary>
         /// <param name="procName"></param>
         /// <returns></returns>
@@ -483,12 +455,12 @@ namespace Andersc.CodeLib.Common.Data
 
         public static SqlParameter[] GetCachedParameters(string cacheKey)
         {
-            SqlParameter[] cachedParms = (SqlParameter[])parmCache[cacheKey];
+            var cachedParms = (SqlParameter[])parmCache[cacheKey];
 
             if (cachedParms == null)
                 return null;
 
-            SqlParameter[] clonedParms = new SqlParameter[cachedParms.Length];
+            var clonedParms = new SqlParameter[cachedParms.Length];
 
             for (int i = 0, j = cachedParms.Length; i < j; i++)
                 clonedParms[i] = (SqlParameter)((ICloneable)cachedParms[i]).Clone();
@@ -502,20 +474,17 @@ namespace Andersc.CodeLib.Common.Data
 
         private static void PrepareCommand(SqlConnection conn, SqlCommand cmd, SqlTransaction trans, CommandType cmdType, string cmdText, SqlParameter[] cmdParms)
         {
-            //判断连接的状态。如果是关闭状态，则打开
             if (conn.State != ConnectionState.Open)
             {
                 conn.Open();
             }
-            //cmd属性赋值
+
             cmd.Connection = conn;
             cmd.CommandText = cmdText;
             cmd.CommandType = cmdType;
-            //设置命令超时时间，默认为30秒，如果存在执行时间很长的命令，应修改命令或这里 ^_^
-            //可以将该配置写在config文件里，此处设置为300秒
+            
             cmd.CommandTimeout = 300;
 
-            //添加cmd需要的存储过程参数
             if (cmdParms != null)
             {
                 foreach (SqlParameter parm in cmdParms)
@@ -524,7 +493,6 @@ namespace Andersc.CodeLib.Common.Data
                 }
             }
 
-            //是否需要用到事务处理
             if (trans != null)
             {
                 cmd.Transaction = trans;
