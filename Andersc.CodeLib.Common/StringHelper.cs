@@ -24,144 +24,15 @@ namespace Andersc.CodeLib.Common
     /// </summary>
     public static class StringHelper
     {
+        public static string WildcardToRegex(string pattern)
+        {
+            return "^" + Regex.Escape(pattern).
+                               Replace(@"\*", ".*").
+                               Replace(@"\?", ".") + "$";
+        }
+
         // TODO: Add more reg exes.
         private static readonly string REGEX_EMAIL = @"\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*";
-
-        #region 数据类型判断相关方法 ： Number, Time, Date, Enum ...
-
-        // TODO: Using Regular Expression
-
-        /// <summary>
-        /// 判断输入字符串是否为数字（此处以float类型来判断，注意其范围）。
-        /// </summary>
-        /// <param name="input">输入字符串。</param>
-        /// <returns>
-        /// 	<c>true</c>如果输入字符串可以转换为数字；否则，<c>false</c>。
-        /// </returns>
-        public static bool IsNumeric(string input)
-        {
-            float tempValue;
-            return float.TryParse(input, out tempValue);
-
-            //return Regex.IsMatch(text, "^\\d+$");
-        }
-
-        /// <summary>
-        /// 判断输入对象是否为数字（此处以float类型来判断，注意其范围）。
-        /// </summary>
-        /// <param name="input">输入对象。</param>
-        /// <returns>
-        /// 	<c>true</c>如果输入对象可以转换为数字；否则，<c>false</c>。
-        /// </returns>
-        public static bool IsNumeric(object input)
-        {
-            string value;
-            if (input == null)
-            {
-                value = null;
-            }
-            else
-            {
-                value = input.ToString();
-            }
-
-            float tempValue;
-            return float.TryParse(value, out tempValue);
-        }
-
-        /// <summary>
-        /// 判断输入字符串是否为整数（此处以int类型来判断，注意其范围）。
-        /// </summary>
-        /// <param name="input">输入字符串。</param>
-        /// <returns>
-        /// 	<c>true</c>如果输入字符串可以转换为整数；否则，<c>false</c>。
-        /// </returns>
-        public static bool IsInt32(string input)
-        {
-            int tempValue;
-            return int.TryParse(input, out tempValue);
-        }
-
-        /// <summary>
-        /// 判断输入对象是否为整数（此处以int类型来判断，注意其范围）。
-        /// </summary>
-        /// <param name="input">输入对象。</param>
-        /// <returns>
-        /// 	<c>true</c>如果输入对象可以转换为整数；否则，<c>false</c>。
-        /// </returns>
-        public static bool IsInt32(object input)
-        {
-            string value;
-            if (input == null)
-            {
-                value = null;
-            }
-            else
-            {
-                value = input.ToString();
-            }
-
-            return IsInt32(value);
-        }
-
-        /// <summary>
-        /// 判断输入字符串是否为日期（此处以DateTime类型来判断）。
-        /// </summary>
-        /// <param name="input">输入字符串。</param>
-        /// <returns>
-        /// 	<c>true</c>如果输入字符串可以转换为整数；否则，<c>false</c>。
-        /// </returns>
-        public static bool IsDateTime(string input)
-        {
-            DateTime tempValue;
-            return DateTime.TryParse(input, out tempValue);
-        }
-
-        /// <summary>
-        /// 判断输入字符串是否为日期（此处以DateTime类型来判断）。
-        /// </summary>
-        /// <param name="input">输入对象。</param>
-        /// <returns>
-        /// 	<c>true</c>如果输入字符串可以转换为整数；否则，<c>false</c>。
-        /// </returns>
-        public static bool IsDateTime(object input)
-        {
-            string value;
-            if (input == null)
-            {
-                value = null;
-            }
-            else
-            {
-                value = input.ToString();
-            }
-
-            return IsDateTime(value);
-        }
-
-        /// <summary>
-        /// 将decimal类型的数值保留2位小数，转换为字符串。
-        /// </summary>
-        /// <param name="value">要四舍五入的decimal值。</param>
-        /// <returns>返回2个小数位的字符串，不足2位的末位补0。</returns>
-        public static string CutDecimal(decimal value)
-        {
-            return CutDecimal(value, 2);
-        }
-
-        /// <summary>
-        /// 将decimal类型的数值四舍五入，保留指定的位数，并转换为字符串。
-        /// </summary>
-        /// <param name="value">要四舍五入的decimal值。</param>
-        /// <param name="decimals">保留的小数位数。</param>
-        /// <returns>返回指定数目小数位的字符串，不足位数的末位补0。</returns>
-        public static string CutDecimal(decimal value, int decimals)
-        {
-            value = decimal.Round(value, decimals);
-            return value.ToString();
-        }
-
-        #endregion
 
         #region Format Methods TODO:
 
