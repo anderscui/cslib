@@ -197,12 +197,6 @@
     <Content Include="Accessories\PageValidator\PageValidator.xml" />
     <Content Include="Readme.txt" />
     <Content Include="TODO.txt" />
-    <Content Include="x64\SQLite.Interop.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="x86\SQLite.Interop.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
   </ItemGroup>
   <ItemGroup>
     <None Include="Accessories\CodeSnippets\MyCsSnippets.snippet" />
@@ -251,6 +245,8 @@
   <ItemGroup>
     <Folder Include="CustomException\" />
     <Folder Include="Validation\" />
+    <Folder Include="x64\" />
+    <Folder Include="x86\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

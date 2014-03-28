@@ -5,7 +5,6 @@ using System.Text;
 
 namespace Andersc.CodeLib.Common.Maths
 {
-    // TODO: Unit Test Cases
     public abstract class DenseMatrix : Matrix
     {
         protected int numberOfRows;
