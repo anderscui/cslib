@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<VisualState xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ShowCheckBoxes="false">
+  <TopNode>[0-1058]Andersc.CodeLib.Tester.Common.TestGenericSet</TopNode>
+  <SelectedNode>[0-1320]Andersc.CodeLib.Tester.FCL.TestWebRequest.GetHtmlByWebClient</SelectedNode>
+  <ExcludeCategories>false</ExcludeCategories>
+  <Nodes>
+    <Node UniqueName="[0-1378]D:\andersc\github\cslib\Andersc.CodeLib.Test\Andersc.CodeLib.Tester.dll" Expanded="true" />
+    <Node UniqueName="[0-1379]Andersc" Expanded="true" />
+    <Node UniqueName="[0-1380]Andersc.CodeLib" Expanded="true" />
+    <Node UniqueName="[0-1381]Andersc.CodeLib.Tester" Expanded="true" />
+    <Node UniqueName="[0-1382]Andersc.CodeLib.Tester.Algorithm" Expanded="true" />
+    <Node UniqueName="[0-1383]Andersc.CodeLib.Tester.Algorithm.Maths" Expanded="true" />
+    <Node UniqueName="[0-1384]Andersc.CodeLib.Tester.Common" Expanded="true" />
+    <Node UniqueName="[0-1385]Andersc.CodeLib.Tester.DataStructure" Expanded="true" />
+    <Node UniqueName="[0-1386]Andersc.CodeLib.Tester.Douban" Expanded="true" />
+    <Node UniqueName="[0-1387]Andersc.CodeLib.Tester.FCL" Expanded="true" />
+    <Node UniqueName="[0-1319]Andersc.CodeLib.Tester.FCL.TestWebRequest" Expanded="true" />
+    <Node UniqueName="[0-1388]Andersc.CodeLib.Tester.Network" Expanded="true" />
+  </Nodes>
+</VisualState>

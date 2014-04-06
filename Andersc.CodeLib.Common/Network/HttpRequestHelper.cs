@@ -9,22 +9,35 @@ namespace Andersc.CodeLib.Common.Network
 {
     public static class HttpRequestHelper
     {
-        public static string GetResponseText(string url)
+        public static string GetResponseText(string url, Browser browser = null, string httpMethod = "GET")
         {
-            HttpWebRequest request = WebRequest.Create(url) as HttpWebRequest;
-            request.Method = "GET";
+            var request = WebRequest.Create(url) as HttpWebRequest;
+            request.Method = httpMethod;
+            if (browser.IsNull())
+            {
+                browser = Browser.Firefox28;
+            }
+            request.UserAgent = browser.UserAgent;
+            //request.Accept = browser.Accept;
+            //request.Headers.Add(HttpRequestHeader.AcceptEncoding, browser.AcceptEncoding);
+            //request.Headers.Add(HttpRequestHeader.AcceptLanguage, browser.AcceptLanguage);
+            // request Charset.
 
             // TODO: Find suitable autoRedirections & timeout.
             request.MaximumAutomaticRedirections = 5;
             request.Timeout = 1000 * 6;
 
-            HttpWebResponse response = request.GetResponse() as HttpWebResponse;
-            StreamReader reader = new StreamReader(response.GetResponseStream());
-            string result = reader.ReadToEnd();
+            using (var resp = request.GetResponse() as HttpWebResponse)
+            {
+                var reader = resp.CharacterSet.IsNull()
+                        ? new StreamReader(resp.GetResponseStream()) 
+                        : new StreamReader(resp.GetResponseStream(), Encoding.GetEncoding(resp.CharacterSet));
 
-            reader.Close();
+                var result = reader.ReadToEnd();
+                reader.Close();
 
-            return result;
+                return result;
+            }
         }
     }
 }

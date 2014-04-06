@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Net;
@@ -10,9 +10,8 @@ using System.Text.RegularExpressions;
 using System.Threading;
 using System.Windows.Forms;
 
-using Andersc.CodeLib.DoubanDownloader.Properties;
+using Andersc.CodeLib.Common.Network;
 using Andersc.CodeLib.DoubanDownloader.Components;
-using System.Diagnostics;
 
 namespace Andersc.CodeLib.DoubanDownloader
 {
@@ -96,8 +95,8 @@ namespace Andersc.CodeLib.DoubanDownloader
                     {
                         DialogResult dr = 
                             MessageBox.Show(
-                                String.Format("存在一个文件夹：{0}，要使用它吗？", possibleDirs[0]), 
-                                "注意", 
+                                String.Format("Folder - \"{0}\" exists, uses it anyway?", possibleDirs[0]),
+                                "Notice", 
                                 MessageBoxButtons.YesNo);
                         if (dr == DialogResult.Yes)
                         {
@@ -156,6 +155,7 @@ namespace Andersc.CodeLib.DoubanDownloader
 
                                 if (!File.Exists(localFullName))
                                 {
+                                    Thread.Sleep(300);
                                     DoanloadFile(thumbSrc.Replace("view/photo/thumb", "view/photo/photo"), localFullName);
                                     photoCount++;
 
@@ -165,7 +165,7 @@ namespace Andersc.CodeLib.DoubanDownloader
                         }
                         else
                         {
-                            MessageBox.Show("下载过程中出现问题:(");
+                            MessageBox.Show("Downloading failed :(");
                             break;
                         }
 
@@ -208,11 +208,11 @@ namespace Andersc.CodeLib.DoubanDownloader
         private void ErrorOccured(object state)
         {
             Exception ex = state as Exception;
-            string msg = "未能完成下载，原因可能是：" + Environment.NewLine
+            string msg = "Downloading failed, the reason might be: " + Environment.NewLine
                     + ex.Message + Environment.NewLine + Environment.NewLine
-                    + "可以将该信息豆邮给作者";
+                    + "You can send a doumail to andersc.";
 
-            MessageBox.Show(msg, "下载失败");
+            MessageBox.Show(msg, "Not Very Good");
 
             lblDownloadInfo.Text = "Please try it again:-)";
             btnDownload.Enabled = true;
@@ -246,9 +246,7 @@ namespace Andersc.CodeLib.DoubanDownloader
 
         private string GetResponseString(string url)
         {
-            WebClient wc = new WebClient();
-            byte[] res = wc.DownloadData(url);
-            return Encoding.UTF8.GetString(res);
+            return HttpRequestHelper.GetResponseText(url);
         }
 
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)

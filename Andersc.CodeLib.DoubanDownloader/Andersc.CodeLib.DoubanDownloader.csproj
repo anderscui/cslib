@@ -119,7 +119,12 @@
     <Content Include="Image\douban_favicon.ico" />
     <Content Include="config.txt" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\Andersc.CodeLib.Common\Andersc.CodeLib.Common.csproj">
+      <Project>{99be9db1-3885-4b20-b048-175878cf3d4e}</Project>
+      <Name>Andersc.CodeLib.Common</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
