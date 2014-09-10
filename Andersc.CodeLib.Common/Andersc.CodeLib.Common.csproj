@@ -166,6 +166,7 @@
     <Compile Include="Searching\IntArraySearcher.cs" />
     <Compile Include="Sorting\IntArraySorter.cs" />
     <Compile Include="Sorting\OrderOption.cs" />
+    <Compile Include="Stats\StatsType.cs" />
     <Compile Include="StringExtension.cs" />
     <Compile Include="Triplet.cs" />
     <Compile Include="WebForm\CustomControl\CustomGridView.cs" />

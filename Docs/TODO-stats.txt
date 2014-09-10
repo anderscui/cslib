@@ -1,0 +1,15 @@
+R in .NET
+
+1. a better repr of vector/list/matrix...
+
+2. custom operators
+
+3. custom StatsType<T>
+
+4. use double type for all numerics? (also double has a NaN value).
+
+5. extension methods to seq
+
+6. interval -> (1, 2), [1, 2]
+
+7. 
